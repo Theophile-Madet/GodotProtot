@@ -6,9 +6,11 @@ var time_since_last_attack: float = ATTACK_COOLDOWN - 2
 
 onready var main = get_node("/root/Main")
 
-#Attacks
 var laser_scene: PackedScene = preload("Attacks/Laser.tscn")
 var provoker_scene: PackedScene = preload("Attacks/Provoker/Provoker.tscn")
+var bloodcry_scene: PackedScene = preload("Attacks/BloodCry/BloodCry.tscn")
+#var attack_scenes = [laser_scene, provoker_scene, bloodcry_scene]
+var attack_scenes = [bloodcry_scene]
 
 var MAX_HP := 50
 var hp
@@ -30,23 +32,9 @@ func _process(delta: float):
 
 
 func attack():
-	var attack = randi() % 2
-	match attack:
-		0:
-			cast_laser()
-		1:
-			cast_provoker()
+	var attack = attack_scenes[randi() % attack_scenes.size()]
+	attack.instance().init(self)
 
-
-func cast_laser():
-	var laser = laser_scene.instance()
-	laser.init(self)
-	
-	
-func cast_provoker():
-	var provoker = provoker_scene.instance()
-	provoker.init(self)
-	
 	
 func get_current_hp():
 	return hp

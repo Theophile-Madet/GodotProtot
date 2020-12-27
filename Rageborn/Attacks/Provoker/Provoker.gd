@@ -21,7 +21,7 @@ var time_since_last_attack: float = ATTACK_COOLDOWN
 
 func init(rageborne):
 	main = rageborne.main
-	rageborne.add_child(self)
+	main.add_child(self)
 	var spawn_position = Vector2.RIGHT
 	spawn_position *= 70 + 70 * randf()
 	spawn_position = spawn_position.rotated(PI * randf())
