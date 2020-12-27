@@ -1,0 +1,44 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Player/Player.gd" type="Script" id=1]
+[ext_resource path="res://PlaceholderAssets/roguelike-characters-pack/Spritesheet/roguelikeChar_transparent.png" type="Texture" id=2]
+[ext_resource path="res://PlaceholderAssets/PlanetCutePNG/Gem Red.png" type="Texture" id=3]
+[ext_resource path="res://Player/ParticlesRuneRedCharge.tres" type="Material" id=4]
+[ext_resource path="res://Player/ParticlesRuneRedCast.tres" type="Material" id=5]
+
+
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 16, 16 )
+
+[node name="Player" type="RigidBody2D"]
+mode = 3
+script = ExtResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+scale = Vector2( 2, 2 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 17, 85, 16, 16 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="ParticlesRuneRedCharge" type="Particles2D" parent="."]
+z_index = 5
+emitting = false
+amount = 5
+process_material = ExtResource( 4 )
+texture = ExtResource( 3 )
+
+[node name="ParticlesRuneRedCast" type="Particles2D" parent="."]
+z_index = 5
+emitting = false
+amount = 20
+lifetime = 0.5
+one_shot = true
+explosiveness = 0.9
+visibility_rect = Rect2( -150, -150, 300, 300 )
+local_coords = false
+process_material = ExtResource( 5 )
+texture = ExtResource( 3 )
