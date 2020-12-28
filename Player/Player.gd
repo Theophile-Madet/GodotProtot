@@ -11,11 +11,14 @@ const MAX_HP = 10
 var hp: float = MAX_HP
 var current_look_direction: Vector2 = Vector2.UP
 var current_move_direction: Vector2
-var current_spell
+var current_spell: Node2D
+var current_charge_particle: Node2D
+var current_cast_particle: Node2D
 var player_index: int
 
 const BACKSWING_DURATION = 0.5
 var fireball_scene : PackedScene = preload("res://Player/Spells/Fireball.tscn")
+var feral_lightning_scene : PackedScene = preload("res://Player/Spells/FeralLightning.tscn")
 
 enum PlayerState {
 	MOVING,
@@ -82,11 +85,13 @@ func do_spells(delta: float):
 			current_spell.cast()
 		else:
 			current_spell.charge(delta)
-			$ParticlesRuneRedCharge.rotation = current_look_direction.angle()
-			$ParticlesRuneRedCast.rotation = current_look_direction.angle()
+			current_charge_particle.rotation = current_look_direction.angle()
+			current_cast_particle.rotation = current_look_direction.angle()
 	elif current_state == PlayerState.MOVING:
 		if Input.is_action_just_pressed("player_%s_rune_right" % player_index):
 			start_fireball()	
+		if Input.is_action_just_pressed("player_%s_rune_top" % player_index):
+			start_feral_lightning()
 	
 	
 func start_fireball():
@@ -94,15 +99,27 @@ func start_fireball():
 	var fireball = fireball_scene.instance()
 	current_spell = fireball
 	fireball.init(self)
-	main.add_child(fireball)
-	$ParticlesRuneRedCharge.emitting = true
-	$ParticlesRuneRedCharge.amount = 5
+	current_charge_particle = $ParticlesRuneRedCharge
+	current_cast_particle = $ParticlesRuneRedCast
+	current_charge_particle.emitting = true
+	current_charge_particle.amount = 5
+	
+
+func start_feral_lightning():
+	current_state = PlayerState.CASTING
+	var lightning = feral_lightning_scene.instance()
+	current_spell = lightning
+	lightning.init(self)
+	current_charge_particle = $ParticlesRuneYellowCharge
+	current_cast_particle = $ParticlesRuneYellowCast
+	current_charge_particle.emitting = true
+	current_charge_particle.amount = 5
 	
 	
 func start_backswing():
-	$ParticlesRuneRedCharge.emitting = false
-	$ParticlesRuneRedCast.amount = max(1, 20 * (current_spell.current_charge / current_spell.MAX_CHARGE))
-	$ParticlesRuneRedCast.emitting = true
+	current_charge_particle.emitting = false
+	current_cast_particle.amount = max(1, 20 * (current_spell.current_charge / current_spell.MAX_CHARGE))
+	current_cast_particle.emitting = true
 	current_spell = null
 	current_state = PlayerState.BACKSWING
 	var timer = Timer.new()

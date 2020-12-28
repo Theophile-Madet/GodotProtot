@@ -18,6 +18,7 @@ var current_state
 
 func init(_player):
 	player = _player
+	player.main.add_child(self)
 
 
 func _ready():
