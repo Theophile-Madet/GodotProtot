@@ -25,6 +25,7 @@ func _ready():
 	current_state = FireballState.CHARGING
 	$VisibilityNotifier2D.connect("screen_exited", self, "queue_free")
 	connect("body_entered", self, "enemy_hit")
+	connect("area_entered", self, "enemy_projectile_hit")
 	scale = Vector2(0 , 0)
 	has_hit_enemy = false
 	input_action = "player_%s_rune_right" % player.player_index
@@ -61,5 +62,13 @@ func enemy_hit(enemy: Node):
 	if has_hit_enemy:
 		return
 	enemy.hit(current_charge)
+	queue_free()
+	has_hit_enemy = true
+	
+	
+func enemy_projectile_hit(projectile: Area2D):
+	if has_hit_enemy:
+		return
+	projectile.queue_free()
 	queue_free()
 	has_hit_enemy = true

@@ -3,7 +3,6 @@
 [ext_resource path="res://PlaceholderAssets/PlanetCutePNG/Star.png" type="Texture" id=1]
 [ext_resource path="res://Player/Spells/Fireball.gd" type="Script" id=2]
 
-
 [sub_resource type="CircleShape2D" id=1]
 radius = 38.797
 
@@ -29,7 +28,7 @@ color_ramp = SubResource( 3 )
 monitoring = false
 monitorable = false
 collision_layer = 4
-collision_mask = 2
+collision_mask = 10
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]

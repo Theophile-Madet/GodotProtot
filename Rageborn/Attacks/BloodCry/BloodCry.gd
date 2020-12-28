@@ -2,7 +2,7 @@ extends RigidBody2D
 
 
 const SIZE := 64
-const CHARGE_TIME := 4
+const CHARGE_TIME := 10
 
 const TWEEN_X_DURATION = 1.6
 const TWEEN_Y_DURATION = 2.1
@@ -17,8 +17,6 @@ const MAX_HP:= 4
 var hp: float = MAX_HP
 var main
 
-const ATTACK_COOLDOWN := 0.3
-var time_since_last_attack: float = ATTACK_COOLDOWN
 
 var projectile_scene: PackedScene = preload("res://Rageborn/Attacks/BloodCry/BloodCryProjectile.tscn")
 

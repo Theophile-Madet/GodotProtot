@@ -3,7 +3,6 @@
 [ext_resource path="res://Rageborn/Rageborn.gd" type="Script" id=1]
 [ext_resource path="res://PlaceholderAssets/PlanetCutePNG/Enemy Bug.png" type="Texture" id=2]
 
-
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 32.0136
 height = 35.0479
