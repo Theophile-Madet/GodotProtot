@@ -18,6 +18,15 @@ var spear_scene: PackedScene = preload("res://Rageborn/Attacks/Provoker/Provoker
 const ATTACK_COOLDOWN := 2
 var time_since_last_attack: float = ATTACK_COOLDOWN
 
+var death_sound_1 := preload("res://Rageborn/Attacks/Provoker/DeathSounds/ProvokerDeathSound1.tscn")
+var death_sound_2 := preload("res://Rageborn/Attacks/Provoker/DeathSounds/ProvokerDeathSound2.tscn")
+var death_sounds := [death_sound_1, death_sound_2]
+
+var hit_sound_1 := preload("res://Rageborn/Attacks/Provoker/HitSounds/ProvokerHitSound1.tscn")
+var hit_sound_2 := preload("res://Rageborn/Attacks/Provoker/HitSounds/ProvokerHitSound2.tscn")
+var hit_sound_3 := preload("res://Rageborn/Attacks/Provoker/HitSounds/ProvokerHitSound3.tscn")
+var hit_sounds := [hit_sound_1, hit_sound_2, hit_sound_3]
+
 
 func init(rageborne):
 	main = rageborne.main
@@ -25,7 +34,7 @@ func init(rageborne):
 	var spawn_position = Vector2.RIGHT
 	spawn_position *= 70 + 70 * randf()
 	spawn_position = spawn_position.rotated(PI * randf())
-	position = spawn_position
+	global_position = rageborne.global_position + spawn_position
 	
 	
 func _ready():
@@ -80,9 +89,13 @@ func get_max_hp():
 	
 func hit(damage: float):
 	hp -= damage
+	var sounds: Array
 	if hp <= 0:
+		sounds = death_sounds
 		queue_free()
-		
+	else :
+		sounds = hit_sounds
+	main.play_sound(sounds[randi() % sounds.size()], position, 0)
 
 func do_attack(delta: float):
 	if time_since_last_attack <= ATTACK_COOLDOWN:

@@ -11,7 +11,7 @@ var provoker_scene: PackedScene = preload("Attacks/Provoker/Provoker.tscn")
 var bloodcry_scene: PackedScene = preload("Attacks/BloodCry/BloodCry.tscn")
 var scorn_scene: PackedScene = preload("Attacks/Scorn/Scorn.tscn")
 var attack_scenes = [laser_scene, provoker_scene, bloodcry_scene, scorn_scene]
-#var attack_scenes = [scorn_scene]
+#var attack_scenes = [provoker_scene]
 
 var MAX_HP := 50
 var hp
