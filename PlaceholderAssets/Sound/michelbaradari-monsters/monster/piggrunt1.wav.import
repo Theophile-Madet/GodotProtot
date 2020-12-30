@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/piggrunt1.wav-c60dea08356d4834b632a9f718de91a5.sample"
+
+[deps]
+
+source_file="res://PlaceholderAssets/Sound/michelbaradari-monsters/monster/piggrunt1.wav"
+dest_files=[ "res://.import/piggrunt1.wav-c60dea08356d4834b632a9f718de91a5.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

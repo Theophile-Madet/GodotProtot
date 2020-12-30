@@ -10,7 +10,17 @@ var main
 var boulder_scene: PackedScene = preload("res://Rageborn/Attacks/Scorn/ScornBoulder.tscn")
 const ATTACK_COOLDOWN := 5
 var time_since_last_attack: float = 0
+var sound_pitch = 0.5 + randf()
 
+var death_sound_1 := preload("res://Rageborn/Attacks/Scorn/DeathSounds/ScornDeathSound1.tscn")
+var death_sound_2 := preload("res://Rageborn/Attacks/Scorn/DeathSounds/ScornDeathSound2.tscn")
+var death_sound_3 := preload("res://Rageborn/Attacks/Scorn/DeathSounds/ScornDeathSound3.tscn")
+var death_sounds := [death_sound_1, death_sound_2, death_sound_3]
+
+var hit_sound_1 := preload("res://Rageborn/Attacks/Scorn/HitSounds/ScornHitSound1.tscn")
+var hit_sound_2 := preload("res://Rageborn/Attacks/Scorn/HitSounds/ScornHitSound2.tscn")
+var hit_sound_3 := preload("res://Rageborn/Attacks/Scorn/HitSounds/ScornHitSound3.tscn")
+var hit_sounds := [hit_sound_1, hit_sound_2, hit_sound_3]
 
 func init(rageborne):
 	main = rageborne.main
@@ -54,8 +64,13 @@ func get_max_hp():
 	
 func hit(damage: float):
 	hp -= damage
+	var sounds: Array
 	if hp <= 0:
+		sounds = death_sounds
 		queue_free()
+	else :
+		sounds = hit_sounds
+	main.play_sound(sounds[randi() % sounds.size()], position, 0, sound_pitch)
 		
 
 func attack():

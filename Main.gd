@@ -52,11 +52,12 @@ func add_hp_bar(target: Node2D):
 	target.add_child(hpbar)
 	
 	
-func play_sound(scene: PackedScene, position: Vector2, volume_db: float) -> AudioStreamPlayer2D:
+func play_sound(scene: PackedScene, position: Vector2, volume_db: float, pitch_scale: float = 1) -> AudioStreamPlayer2D:
 	var sound = (scene.instance() as AudioStreamPlayer2D)
 	add_child(sound)
 	sound.volume_db = volume_db
 	sound.position = position
 	sound.connect("finished", sound, "queue_free")
+	sound.pitch_scale = pitch_scale
 	sound.play()
 	return sound

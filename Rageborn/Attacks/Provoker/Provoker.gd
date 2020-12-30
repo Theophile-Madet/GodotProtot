@@ -17,6 +17,7 @@ var targets_in_range: Array = []
 var spear_scene: PackedScene = preload("res://Rageborn/Attacks/Provoker/ProvokerSpear.tscn")
 const ATTACK_COOLDOWN := 2
 var time_since_last_attack: float = ATTACK_COOLDOWN
+var sound_pitch = 0.5 + randf()
 
 var death_sound_1 := preload("res://Rageborn/Attacks/Provoker/DeathSounds/ProvokerDeathSound1.tscn")
 var death_sound_2 := preload("res://Rageborn/Attacks/Provoker/DeathSounds/ProvokerDeathSound2.tscn")
@@ -95,7 +96,7 @@ func hit(damage: float):
 		queue_free()
 	else :
 		sounds = hit_sounds
-	main.play_sound(sounds[randi() % sounds.size()], position, 0)
+	main.play_sound(sounds[randi() % sounds.size()], position, 0, sound_pitch)
 
 func do_attack(delta: float):
 	if time_since_last_attack <= ATTACK_COOLDOWN:
