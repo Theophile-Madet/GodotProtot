@@ -8,6 +8,10 @@ var current_charge : float
 var player : Node2D
 var direction: Vector2
 var has_hit_enemy: bool
+var main
+
+var sound_cast: PackedScene = preload("res://Player/Spells/FireballSoundCast.tscn")
+var sound_hit: PackedScene = preload("res://Player/Spells/FireballSoundHit.tscn")
 
 enum FireballState {
 	CHARGING,
@@ -18,7 +22,8 @@ var current_state
 
 func init(_player):
 	player = _player
-	player.main.add_child(self)
+	main = player.main
+	main.add_child(self)
 
 
 func _ready():
@@ -30,7 +35,7 @@ func _ready():
 	scale = Vector2(0 , 0)
 	has_hit_enemy = false
 	input_action = "player_%s_rune_right" % player.player_index
-	
+	$SoundCharge.play()
 
 
 func _process(delta: float):
@@ -57,6 +62,8 @@ func cast():
 	player.start_backswing()
 	current_state = FireballState.CASTED
 	monitoring = true
+	main.play_sound(sound_cast, position, get_sound_volume())
+	$SoundCharge.stop()
 	
 	
 func enemy_hit(enemy: Node):
@@ -65,6 +72,8 @@ func enemy_hit(enemy: Node):
 	enemy.hit(current_charge)
 	queue_free()
 	has_hit_enemy = true
+	main.play_sound(sound_hit, position, get_sound_volume())
+	
 	
 	
 func enemy_projectile_hit(projectile: Area2D):
@@ -73,3 +82,8 @@ func enemy_projectile_hit(projectile: Area2D):
 	projectile.queue_free()
 	queue_free()
 	has_hit_enemy = true
+	main.play_sound(sound_hit, position, get_sound_volume())
+
+
+func get_sound_volume():
+	return -12 * (1 - (current_charge / MAX_CHARGE))

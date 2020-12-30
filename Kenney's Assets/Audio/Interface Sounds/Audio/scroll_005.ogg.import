@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/scroll_005.ogg-c9e09a7d23667a3afa75dc5fbe6bf43f.oggstr"
+
+[deps]
+
+source_file="res://Kenney's Assets/Audio/Interface Sounds/Audio/scroll_005.ogg"
+dest_files=[ "res://.import/scroll_005.ogg-c9e09a7d23667a3afa75dc5fbe6bf43f.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
