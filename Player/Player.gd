@@ -17,8 +17,8 @@ var current_cast_particle: Node2D
 var player_index: int
 
 const BACKSWING_DURATION = 0.5
-var fireball_scene : PackedScene = preload("res://Player/Spells/Fireball.tscn")
-var feral_lightning_scene : PackedScene = preload("res://Player/Spells/FeralLightning.tscn")
+var fireball_scene : PackedScene = preload("Spells/Fireball/Fireball.tscn")
+var feral_lightning_scene : PackedScene = preload("Spells/FeralLightning/FeralLightning.tscn")
 
 enum PlayerState {
 	MOVING,

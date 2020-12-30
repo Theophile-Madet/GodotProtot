@@ -10,8 +10,8 @@ var direction: Vector2
 var has_hit_enemy: bool
 var main
 
-var sound_cast: PackedScene = preload("res://Player/Spells/FireballSoundCast.tscn")
-var sound_hit: PackedScene = preload("res://Player/Spells/FireballSoundHit.tscn")
+var sound_cast: PackedScene = preload("FireballSoundCast.tscn")
+var sound_hit: PackedScene = preload("FireballSoundHit.tscn")
 
 enum FireballState {
 	CHARGING,
