@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Rageborn/Attacks/Provoker/SpearHitSounds/hit3.ogg" type="AudioStream" id=1]
+
+[node name="ProvokerSpearHitSound3" type="AudioStreamPlayer2D"]
+stream = ExtResource( 1 )

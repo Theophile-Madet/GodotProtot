@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/hit1.ogg-2a66d22f00eff013d42c037b86a8cd77.oggstr"
+
+[deps]
+
+source_file="res://Rageborn/Attacks/Provoker/SpearHitSounds/hit1.ogg"
+dest_files=[ "res://.import/hit1.ogg-2a66d22f00eff013d42c037b86a8cd77.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

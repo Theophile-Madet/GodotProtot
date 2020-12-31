@@ -24,6 +24,13 @@ var throw_sound_7 := preload("res://Rageborn/Attacks/Provoker/ThrowSounds/Provok
 var throw_sound_8 := preload("res://Rageborn/Attacks/Provoker/ThrowSounds/ProvokerThrowSound8.tscn")
 var throw_sounds := [throw_sound_1, throw_sound_2, throw_sound_3, throw_sound_4, throw_sound_5, throw_sound_6, throw_sound_7, throw_sound_8]
 
+var hit_sound_1 := preload("res://Rageborn/Attacks/Provoker/SpearHitSounds/ProvokerSpearHitSound1.tscn")
+var hit_sound_2 := preload("res://Rageborn/Attacks/Provoker/SpearHitSounds/ProvokerSpearHitSound2.tscn")
+var hit_sound_3 := preload("res://Rageborn/Attacks/Provoker/SpearHitSounds/ProvokerSpearHitSound3.tscn")
+var hit_sound_4 := preload("res://Rageborn/Attacks/Provoker/SpearHitSounds/ProvokerSpearHitSound4.tscn")
+var hit_sound_5 := preload("res://Rageborn/Attacks/Provoker/SpearHitSounds/ProvokerSpearHitSound5.tscn")
+var hit_sounds := [hit_sound_1, hit_sound_2, hit_sound_3, hit_sound_4, hit_sound_5]
+
 func init(_provoker):
 	provoker = _provoker
 	main = provoker.main
@@ -48,11 +55,11 @@ func _process(delta: float):
 			look_at(target.position)
 			global_position = provoker.global_position
 		ProvokerSpearState.THROWN:
-			if current_speed >= 0:
-				position += direction * delta * current_speed
-				if current_speed <= 2:
-					get_tree().create_timer(0.5).connect("timeout", self, "queue_free")
-					monitoring = false
+			monitoring = current_speed > 40
+			position += direction * delta * current_speed
+			if current_speed <= 2:
+				get_tree().create_timer(0.5).connect("timeout", self, "queue_free")
+					
 
 
 func throw():
@@ -70,6 +77,8 @@ func throw():
 func on_body_touched(body: RigidBody2D):
 	body.hit(1)
 	queue_free()
+	var sound = hit_sounds[randi() % hit_sounds.size()]
+	main.play_sound(sound, position, 0)
 
 
 func on_provoker_exit():
