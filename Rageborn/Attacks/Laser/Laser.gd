@@ -39,25 +39,10 @@ func _ready():
 	add_child(tween)
 	tween.start()
 	
-	var timer = Timer.new()
-	timer.wait_time = 2.5
-	add_child(timer)
-	timer.start()
-	timer.connect("timeout", self, "queue_free")
-	
-	timer = Timer.new()
-	timer.wait_time = 1
-	add_child(timer)
-	timer.start()
-	timer.connect("timeout", self, "enable_monitoring")
+	get_tree().create_timer(2.5).connect("timeout", self, "queue_free")
+	get_tree().create_timer(1).connect("timeout", self, "enable_monitoring")
 	monitoring = false
-	
-	timer = Timer.new()
-	timer.wait_time = 2
-	add_child(timer)
-	timer.start()
-	timer.connect("timeout", self, "disable_monitoring")
-	monitoring = false
+	get_tree().create_timer(2).connect("timeout", self, "disable_monitoring")
 	
 	
 func enable_monitoring():

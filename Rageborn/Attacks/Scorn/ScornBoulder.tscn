@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Rageborn/Attacks/Scorn/ScornBoulder.png" type="Texture" id=1]
 [ext_resource path="res://Rageborn/Attacks/Scorn/ScornBoulder.gd" type="Script" id=2]
+[ext_resource path="res://PlaceholderAssets/Sound/508578__wdomino__boulderpush.wav" type="AudioStream" id=3]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 16.0
@@ -21,3 +22,7 @@ texture = ExtResource( 1 )
 shape = SubResource( 1 )
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+
+[node name="RollSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 3 )
+autoplay = true

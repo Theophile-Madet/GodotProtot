@@ -19,6 +19,7 @@ const ATTACK_COOLDOWN := 2
 var time_since_last_attack: float = ATTACK_COOLDOWN
 var sound_pitch = 0.5 + randf()
 
+var summon_sound := preload("res://Rageborn/Attacks/SummonSound/SummonSound.tscn")
 var death_sound_1 := preload("res://Rageborn/Attacks/Provoker/DeathSounds/ProvokerDeathSound1.tscn")
 var death_sound_2 := preload("res://Rageborn/Attacks/Provoker/DeathSounds/ProvokerDeathSound2.tscn")
 var death_sounds := [death_sound_1, death_sound_2]
@@ -44,9 +45,11 @@ func _ready():
 	var timer := Timer.new()
 	timer.wait_time = 2.4
 	timer.connect("timeout", self, "spawn")
+	timer.one_shot = true
 	add_child(timer)
 	timer.start()
 	layers = 0b0
+	main.play_sound(summon_sound, position, 1)
 	
 
 func spawn():
@@ -54,6 +57,7 @@ func spawn():
 	current_state = ProvokerState.MARCHING
 	main.add_hp_bar(self)
 	layers = 0b10
+	$SpawnSound.play()
 	
 	
 func _process(delta: float):

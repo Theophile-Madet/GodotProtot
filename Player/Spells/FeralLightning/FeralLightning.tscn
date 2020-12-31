@@ -1,8 +1,9 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Player/Spells/FeralLightning/FeralLightning.tres" type="Texture" id=1]
 [ext_resource path="res://Player/Spells/FeralLightning/FeralLightning.gd" type="Script" id=2]
 [ext_resource path="res://Kenney's Assets/Particle Pack/PNG (Transparent)/circle_01.png" type="Texture" id=3]
+[ext_resource path="res://Player/Spells/FeralLightning/FeralLightningSoundCharge.wav" type="AudioStream" id=4]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 184.0
@@ -80,3 +81,6 @@ texture = ExtResource( 3 )
 modulate = Color( 0.807843, 0.737255, 0.160784, 1 )
 position = Vector2( 4.76837e-06, -7.15256e-07 )
 texture = ExtResource( 3 )
+
+[node name="SoundCharge" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 4 )

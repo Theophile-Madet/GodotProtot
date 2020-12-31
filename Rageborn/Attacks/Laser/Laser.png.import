@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Laser.png-43143cdc465e63b33bb5a1196d6e61af.stex"
+path="res://.import/Laser.png-6cbb98832748add7fbedf9eb8f4389f9.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Rageborn/Attacks/Laser.png"
-dest_files=[ "res://.import/Laser.png-43143cdc465e63b33bb5a1196d6e61af.stex" ]
+source_file="res://Rageborn/Attacks/Laser/Laser.png"
+dest_files=[ "res://.import/Laser.png-6cbb98832748add7fbedf9eb8f4389f9.stex" ]
 
 [params]
 

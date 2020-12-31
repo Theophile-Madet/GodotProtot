@@ -12,6 +12,9 @@ const ATTACK_COOLDOWN := 5
 var time_since_last_attack: float = 0
 var sound_pitch = 0.5 + randf()
 
+var summon_sound := preload("res://Rageborn/Attacks/SummonSound/SummonSound.tscn")
+var throw_sound := preload("res://Rageborn/Attacks/Scorn/ScornThrowSound.tscn")
+
 var death_sound_1 := preload("res://Rageborn/Attacks/Scorn/DeathSounds/ScornDeathSound1.tscn")
 var death_sound_2 := preload("res://Rageborn/Attacks/Scorn/DeathSounds/ScornDeathSound2.tscn")
 var death_sound_3 := preload("res://Rageborn/Attacks/Scorn/DeathSounds/ScornDeathSound3.tscn")
@@ -37,15 +40,18 @@ func _ready():
 	var timer := Timer.new()
 	timer.wait_time = 2.4
 	timer.connect("timeout", self, "spawn")
+	timer.one_shot = true
 	add_child(timer)
 	timer.start()
 	layers = 0b0
+	main.play_sound(summon_sound, position, 1)
 	
 
 func spawn():
 	$Sprite.visible = true
 	main.add_hp_bar(self)
 	layers = 0b10
+	$SpawnSound.play()
 	
 	
 func _process(delta: float):
@@ -77,3 +83,4 @@ func attack():
 	time_since_last_attack -= ATTACK_COOLDOWN
 	var boulder = boulder_scene.instance()
 	boulder.init(self)
+	main.play_sound(throw_sound, position, 0, 0.75 + randf() * 0.5)

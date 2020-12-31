@@ -85,5 +85,5 @@ func enemy_projectile_hit(projectile: Area2D):
 	main.play_sound(sound_hit, position, get_sound_volume())
 
 
-func get_sound_volume():
+func get_sound_volume() -> float:
 	return -12 * (1 - (current_charge / MAX_CHARGE))

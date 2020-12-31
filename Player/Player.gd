@@ -122,12 +122,7 @@ func start_backswing():
 	current_cast_particle.emitting = true
 	current_spell = null
 	current_state = PlayerState.BACKSWING
-	var timer = Timer.new()
-	timer.wait_time = BACKSWING_DURATION
-	timer.connect("timeout", self, "end_backswing")
-	timer.connect("timeout", timer, "queue_free")
-	add_child(timer)
-	timer.start()
+	get_tree().create_timer(BACKSWING_DURATION).connect("timeout", self, "end_backswing")
 	
 
 func end_backswing():

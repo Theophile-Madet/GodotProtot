@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/550327__eminyildirim__dark-magic-cast-loop.wav-043e384d8ffce44627ee1034bc757394.sample"
+
+[deps]
+
+source_file="res://PlaceholderAssets/Sound/550327__eminyildirim__dark-magic-cast-loop.wav"
+dest_files=[ "res://.import/550327__eminyildirim__dark-magic-cast-loop.wav-043e384d8ffce44627ee1034bc757394.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

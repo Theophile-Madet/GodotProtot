@@ -28,18 +28,8 @@ func _ready():
 	connect("body_entered", self, "on_body_touched")
 	provoker.connect("tree_exiting", self, "on_provoker_exit")
 	
-	var timer := Timer.new()
-	timer.wait_time = 1
-	timer.one_shot = true
-	timer.connect("timeout", self, "throw")
-	self.add_child(timer)
-	timer.start()
-	
-	timer = Timer.new()
-	timer.wait_time = 5
-	timer.connect("timeout", self, "queue_free")
-	self.add_child(timer)
-	timer.start()
+	get_tree().create_timer(1).connect("timeout", self, "throw")
+	get_tree().create_timer(5).connect("timeout", self, "queue_free")
 
 
 func _process(delta: float):
