@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/ScornBoulder.png-a1bb430ce287910f5e44be5aae43cd95.stex"
+path="res://.import/ScornBoulder.png-6791b3e326cf00709d3ce2a423cbe816.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Rageborn/Attacks/Scorn/ScornBoulder.png"
-dest_files=[ "res://.import/ScornBoulder.png-a1bb430ce287910f5e44be5aae43cd95.stex" ]
+source_file="res://Rageborn/Attacks/Scorn/Boulder/ScornBoulder.png"
+dest_files=[ "res://.import/ScornBoulder.png-6791b3e326cf00709d3ce2a423cbe816.stex" ]
 
 [params]
 

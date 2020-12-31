@@ -4,6 +4,7 @@ const SPEED = 100
 
 var main
 const direction := Vector2.DOWN 
+var hit_sound := preload("ScornBoulderSoundHit.tscn")
 
 
 func init(scorn):
@@ -24,5 +25,6 @@ func _process(delta: float):
 	
 func on_body_touched(body: RigidBody2D):
 	body.hit(3)
+	main.play_sound(hit_sound,  position, 0, 0.75 + randf() * 0.5)
 	queue_free()
 

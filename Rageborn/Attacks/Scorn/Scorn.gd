@@ -7,7 +7,7 @@ const SIZE = 48
 const MAX_HP:= 9
 var hp: float = MAX_HP
 var main
-var boulder_scene: PackedScene = preload("res://Rageborn/Attacks/Scorn/ScornBoulder.tscn")
+var boulder_scene: PackedScene = preload("res://Rageborn/Attacks/Scorn/Boulder/ScornBoulder.tscn")
 const ATTACK_COOLDOWN := 5
 var time_since_last_attack: float = 0
 var sound_pitch = 0.5 + randf()
