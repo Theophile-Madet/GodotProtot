@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/S-26.wav-cf1929920945c04b904bae77116cd4ff.sample"
+
+[deps]
+
+source_file="res://Player/Sounds/FemaleHurt/S-26.wav"
+dest_files=[ "res://.import/S-26.wav-cf1929920945c04b904bae77116cd4ff.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

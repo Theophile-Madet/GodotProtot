@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/S-11.ogg-c08535a4546c347f7ee1184466df88a7.oggstr"
+
+[deps]
+
+source_file="res://Player/Sounds/MaleHurt/S-11.ogg"
+dest_files=[ "res://.import/S-11.ogg-c08535a4546c347f7ee1184466df88a7.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
