@@ -15,6 +15,8 @@ var current_spell: Node2D
 var current_charge_particle: Node2D
 var current_cast_particle: Node2D
 var player_index: int
+var voice: String
+var voice_max_index: int
 
 const BACKSWING_DURATION = 0.5
 var fireball_scene : PackedScene = preload("Spells/Fireball/Fireball.tscn")
@@ -40,6 +42,12 @@ func _ready():
 	main.players.append(self)
 	main.add_hp_bar(self)
 	current_state = PlayerState.MOVING
+	if randf() > 0.5:
+		voice = "Female"
+		voice_max_index = 36
+	else:
+		voice = "Male"
+		voice_max_index = 11
 	
 	
 func _process(delta: float):
@@ -132,6 +140,9 @@ func end_backswing():
 	
 func hit(damage: float):
 	hp -= damage
+	var index = (randi() % voice_max_index) + 1
+	var path := "res://Player/Sounds/%sHurt/S-%s.wav" % [voice, index]
+	main.play_sound_from_file(path, position, 0)
 	
 
 func get_current_hp():

@@ -61,3 +61,16 @@ func play_sound(scene: PackedScene, position: Vector2, volume_db: float, pitch_s
 	sound.pitch_scale = pitch_scale
 	sound.play()
 	return sound
+
+
+func play_sound_from_file(path: String, position: Vector2, volume_db: float, pitch_scale: float = 1) -> AudioStreamPlayer2D:
+	var sound := AudioStreamPlayer2D.new()
+	var sound_file: AudioStream = load(path)
+	sound.stream = sound_file
+	add_child(sound)
+	sound.volume_db = volume_db
+	sound.position = position
+	sound.connect("finished", sound, "queue_free")
+	sound.pitch_scale = pitch_scale
+	sound.play()
+	return sound
