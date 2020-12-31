@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Rageborn/Attacks/Provoker/ThrowSounds/Woosh (8 sounds)/woosh1.ogg" type="AudioStream" id=1]
+
+[node name="ProvokerThrowSound1" type="AudioStreamPlayer2D"]
+stream = ExtResource( 1 )

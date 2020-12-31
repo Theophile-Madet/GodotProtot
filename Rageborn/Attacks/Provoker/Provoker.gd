@@ -102,6 +102,7 @@ func hit(damage: float):
 		sounds = hit_sounds
 	main.play_sound(sounds[randi() % sounds.size()], position, 0, sound_pitch)
 
+
 func do_attack(delta: float):
 	if time_since_last_attack <= ATTACK_COOLDOWN:
 		time_since_last_attack += delta
