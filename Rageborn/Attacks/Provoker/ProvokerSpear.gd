@@ -1,11 +1,12 @@
 extends Area2D
 
-const SPEED = 800
+const START_SPEED = 1000
 
 var main
 var provoker: Node2D
 var target: Node2D
 var direction: Vector2
+var current_speed: float = START_SPEED
 
 enum ProvokerSpearState {
 	AIMING,
@@ -47,7 +48,11 @@ func _process(delta: float):
 			look_at(target.position)
 			global_position = provoker.global_position
 		ProvokerSpearState.THROWN:
-			position += direction * delta * SPEED
+			if current_speed >= 0:
+				position += direction * delta * current_speed
+				if current_speed <= 2:
+					get_tree().create_timer(0.5).connect("timeout", self, "queue_free")
+					monitoring = false
 
 
 func throw():
@@ -55,6 +60,11 @@ func throw():
 	direction = (target.position - self.position).normalized()
 	var sound = throw_sounds[randi() % throw_sounds.size()]
 	main.play_sound(sound, position, 0)
+	
+	var tween := Tween.new()
+	tween.interpolate_property(self, "current_speed", START_SPEED, 0, 2, Tween.TRANS_EXPO, Tween.EASE_OUT, 0)
+	add_child(tween)
+	tween.start()
 	
 	
 func on_body_touched(body: RigidBody2D):

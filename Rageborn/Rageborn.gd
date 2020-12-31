@@ -1,7 +1,7 @@
 extends Node2D
 
 const SIZE := 60
-const ATTACK_COOLDOWN := 5
+const ATTACK_COOLDOWN := 50
 var time_since_last_attack: float = ATTACK_COOLDOWN - 0.5
 
 onready var main = get_node("/root/Main")
@@ -11,7 +11,7 @@ var provoker_scene: PackedScene = preload("Attacks/Provoker/Provoker.tscn")
 var bloodcry_scene: PackedScene = preload("Attacks/BloodCry/BloodCry.tscn")
 var scorn_scene: PackedScene = preload("Attacks/Scorn/Scorn.tscn")
 #var attack_scenes = [laser_scene, provoker_scene, bloodcry_scene, scorn_scene]
-var attack_scenes = [provoker_scene, scorn_scene]
+var attack_scenes = [provoker_scene]
 
 var MAX_HP := 50
 var hp
