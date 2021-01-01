@@ -1,17 +1,20 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://PlaceholderAssets/roguelike-characters-pack/Spritesheet/roguelikeChar_transparent.png" type="Texture" id=2]
 [ext_resource path="res://PlaceholderAssets/PlanetCutePNG/Gem Red.png" type="Texture" id=3]
-[ext_resource path="res://Player/ParticlesRuneRedCharge.tres" type="Material" id=4]
-[ext_resource path="res://Player/ParticlesRuneRedCast.tres" type="Material" id=5]
+[ext_resource path="res://Player/RuneParticles/ParticlesRuneRedCharge.tres" type="Material" id=4]
+[ext_resource path="res://Player/RuneParticles/ParticlesRuneRedCast.tres" type="Material" id=5]
 [ext_resource path="res://PlaceholderAssets/PlanetCutePNG/Gem Orange.png" type="Texture" id=6]
-[ext_resource path="res://Player/ParticlesRuneYellowCharge.tres" type="Material" id=7]
-[ext_resource path="res://Player/ParticlesRuneYellowCast.tres" type="Material" id=8]
+[ext_resource path="res://Player/RuneParticles/ParticlesRuneYellowCharge.tres" type="Material" id=7]
+[ext_resource path="res://Player/RuneParticles/ParticlesRuneYellowCast.tres" type="Material" id=8]
 [ext_resource path="res://Kenney's Assets/Particle Pack/PNG (Transparent)/magic_05.png" type="Texture" id=9]
-[ext_resource path="res://Player/ParticlesRuneGreenCharge.tres" type="Material" id=10]
-[ext_resource path="res://Player/ParticlesRuneGreenCast.tres" type="Material" id=11]
+[ext_resource path="res://Player/RuneParticles/ParticlesRuneGreenCharge.tres" type="Material" id=10]
+[ext_resource path="res://Player/RuneParticles/ParticlesRuneGreenCast.tres" type="Material" id=11]
 [ext_resource path="res://PlaceholderAssets/PlanetCutePNG/Gem Green.png" type="Texture" id=12]
+[ext_resource path="res://Player/RuneParticles/ParticlesRuneBlueCharge.tres" type="Material" id=13]
+[ext_resource path="res://Player/RuneParticles/ParticlesRuneBlueCast.tres" type="Material" id=14]
+[ext_resource path="res://PlaceholderAssets/PlanetCutePNG/Gem Blue.png" type="Texture" id=15]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 24, 24 )
@@ -110,6 +113,26 @@ visibility_rect = Rect2( -150, -150, 300, 300 )
 local_coords = false
 process_material = ExtResource( 11 )
 texture = ExtResource( 12 )
+
+[node name="ParticlesRuneBlueCharge" type="Particles2D" parent="."]
+z_index = 5
+emitting = false
+amount = 5
+local_coords = false
+process_material = ExtResource( 13 )
+texture = ExtResource( 15 )
+
+[node name="ParticlesRuneBlueCast" type="Particles2D" parent="."]
+z_index = 5
+emitting = false
+amount = 20
+lifetime = 0.5
+one_shot = true
+explosiveness = 0.9
+visibility_rect = Rect2( -150, -150, 300, 300 )
+local_coords = false
+process_material = ExtResource( 14 )
+texture = ExtResource( 15 )
 
 [node name="Body" type="Sprite" parent="."]
 scale = Vector2( 3, 3 )
