@@ -8,7 +8,7 @@ onready var main = get_node("/root/Main")
 
 const SIZE := 48
 const MAX_HP = 10
-var hp: float = MAX_HP
+var hp: float = MAX_HP / 2
 var current_look_direction: Vector2 = Vector2.UP
 var current_move_direction: Vector2
 var current_spell: Node2D
@@ -19,8 +19,9 @@ var voice: String
 var voice_max_index: int
 
 const BACKSWING_DURATION = 0.5
-var fireball_scene : PackedScene = preload("Spells/Fireball/Fireball.tscn")
-var feral_lightning_scene : PackedScene = preload("Spells/FeralLightning/FeralLightning.tscn")
+const fireball_scene : PackedScene = preload("Spells/Fireball/Fireball.tscn")
+const feral_lightning_scene : PackedScene = preload("Spells/FeralLightning/FeralLightning.tscn")
+const heal_scene : PackedScene = preload("Spells/Heal/Heal.tscn")
 
 var body_regions := []
 var armor_regions := []
@@ -146,6 +147,8 @@ func do_spells(delta: float):
 			start_fireball()	
 		if Input.is_action_just_pressed("player_%s_rune_top" % player_index):
 			start_feral_lightning()
+		if Input.is_action_just_pressed("player_%s_rune_bottom" % player_index):
+			start_heal()	
 	
 	
 func start_fireball():
@@ -155,6 +158,17 @@ func start_fireball():
 	fireball.init(self)
 	current_charge_particle = $ParticlesRuneRedCharge
 	current_cast_particle = $ParticlesRuneRedCast
+	current_charge_particle.emitting = true
+	current_charge_particle.amount = 5
+	
+	
+func start_heal():
+	current_state = PlayerState.CASTING
+	var heal = heal_scene.instance()
+	current_spell = heal
+	heal.init(self)
+	current_charge_particle = $ParticlesRuneGreenCharge
+	current_cast_particle = $ParticlesRuneGreenCast
 	current_charge_particle.emitting = true
 	current_charge_particle.amount = 5
 	
@@ -186,9 +200,11 @@ func end_backswing():
 	
 func hit(damage: float):
 	hp -= damage
-	var index = (randi() % voice_max_index) + 1
-	var path := "res://Player/Sounds/%sHurt/S-%s.wav" % [voice, index]
-	main.play_sound_from_file(path, position, 0)
+	hp = clamp(hp, 0, MAX_HP)
+	if damage > 0:
+		var index = (randi() % voice_max_index) + 1
+		var path := "res://Player/Sounds/%sHurt/S-%s.wav" % [voice, index]	
+		main.play_sound_from_file(path, position, 0)
 	
 
 func get_current_hp():

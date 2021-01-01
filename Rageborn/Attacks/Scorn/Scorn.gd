@@ -77,6 +77,7 @@ func hit(damage: float):
 	else :
 		sounds = hit_sounds
 	main.play_sound(sounds[randi() % sounds.size()], position, 0, sound_pitch)
+	hp = clamp(hp, 0, MAX_HP)
 		
 
 func attack():

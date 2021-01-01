@@ -47,3 +47,4 @@ func get_max_hp():
 	
 func hit(damage: float):
 	hp -= damage
+	hp = clamp(hp, 0, MAX_HP)
