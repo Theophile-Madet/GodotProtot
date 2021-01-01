@@ -22,6 +22,7 @@ const BACKSWING_DURATION = 0.5
 const fireball_scene : PackedScene = preload("Spells/Fireball/Fireball.tscn")
 const feral_lightning_scene : PackedScene = preload("Spells/FeralLightning/FeralLightning.tscn")
 const heal_scene : PackedScene = preload("Spells/Heal/Heal.tscn")
+const frost_nova_scene : PackedScene = preload("Spells/FrostNova/FrostNova.tscn")
 
 var body_regions := []
 var armor_regions := []
@@ -92,6 +93,7 @@ func randomize_sprite(part: Sprite, regions: Array):
 	part.region_rect.position = regions[randi() % regions.size()]
 	pass
 	
+	
 func _process(delta: float):
 	update_look_direction()
 	if current_state == PlayerState.MOVING:
@@ -149,6 +151,8 @@ func do_spells(delta: float):
 			start_feral_lightning()
 		if Input.is_action_just_pressed("player_%s_rune_bottom" % player_index):
 			start_heal()	
+		if Input.is_action_just_pressed("player_%s_rune_left" % player_index):
+			start_frost_nova()
 	
 	
 func start_fireball():
@@ -159,7 +163,6 @@ func start_fireball():
 	current_charge_particle = $ParticlesRuneRedCharge
 	current_cast_particle = $ParticlesRuneRedCast
 	current_charge_particle.emitting = true
-	current_charge_particle.amount = 5
 	
 	
 func start_heal():
@@ -170,7 +173,6 @@ func start_heal():
 	current_charge_particle = $ParticlesRuneGreenCharge
 	current_cast_particle = $ParticlesRuneGreenCast
 	current_charge_particle.emitting = true
-	current_charge_particle.amount = 5
 	
 
 func start_feral_lightning():
@@ -181,7 +183,16 @@ func start_feral_lightning():
 	current_charge_particle = $ParticlesRuneYellowCharge
 	current_cast_particle = $ParticlesRuneYellowCast
 	current_charge_particle.emitting = true
-	current_charge_particle.amount = 5
+	
+	
+func start_frost_nova():
+	current_state = PlayerState.CASTING
+	var nova = frost_nova_scene.instance()
+	current_spell = nova
+	nova.init(self)
+	current_charge_particle = $ParticlesRuneBlueCharge
+	current_cast_particle = $ParticlesRuneBlueCast
+	current_charge_particle.emitting = true
 	
 	
 func start_backswing():

@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Player/Spells/FrostNova/iglooRoofRight.png" type="Texture" id=1]
+[ext_resource path="res://Player/Spells/FrostNova/FrostNova.gd" type="Script" id=2]
+[ext_resource path="res://Player/Spells/Heal/547365__eminyildirim__magic-aura-shimmer.wav" type="AudioStream" id=3]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 192.0
+
+[node name="FrostNova" type="Area2D"]
+collision_layer = 4
+collision_mask = 2147483658
+script = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+modulate = Color( 1, 1, 1, 0.286275 )
+rotation = 0.785398
+scale = Vector2( 2.72287, 2.72287 )
+texture = ExtResource( 1 )
+centered = false
+offset = Vector2( 0, -70 )
+
+[node name="SoundCharge" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 3 )
+attenuation = 0.00209331
