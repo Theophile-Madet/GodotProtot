@@ -79,7 +79,7 @@ func on_body_entered(body: RigidBody2D):
 	
 	
 func on_body_exited(body: RigidBody2D):
-	enemies_in_range.remove(enemies_in_range.find(body))
+	enemies_in_range.erase(body)
 
 
 func get_sound_volume() -> float:

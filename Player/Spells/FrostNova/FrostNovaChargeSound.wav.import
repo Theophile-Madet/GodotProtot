@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/FrostNovaChargeSound.wav-d457340db8496452beb8d96768cc8326.sample"
+
+[deps]
+
+source_file="res://Player/Spells/FrostNova/FrostNovaChargeSound.wav"
+dest_files=[ "res://.import/FrostNovaChargeSound.wav-d457340db8496452beb8d96768cc8326.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

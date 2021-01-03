@@ -1,10 +1,12 @@
 extends Node2D
 
 const SIZE := 60
-const ATTACK_COOLDOWN := 50
+const ATTACK_COOLDOWN := 10
 var time_since_last_attack: float = ATTACK_COOLDOWN - 0.5
 
 onready var main = get_node("/root/Main")
+
+var buffs := []
 
 var laser_scene: PackedScene = preload("Attacks/Laser/Laser.tscn")
 var provoker_scene: PackedScene = preload("Attacks/Provoker/Provoker.tscn")
@@ -48,3 +50,11 @@ func get_max_hp():
 func hit(damage: float):
 	hp -= damage
 	hp = clamp(hp, 0, MAX_HP)
+	
+
+func add_buff(buff):
+	buffs.append(buff)
+	
+	
+func remove_buff(buff):
+	buffs.erase(buff)

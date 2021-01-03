@@ -19,6 +19,8 @@ const ATTACK_COOLDOWN := 2
 var time_since_last_attack: float = ATTACK_COOLDOWN
 var sound_pitch = 0.5 + randf()
 
+var buffs := []
+
 var summon_sound := preload("res://Rageborn/Attacks/SummonSound/SummonSound.tscn")
 var death_sound_1 := preload("res://Rageborn/Attacks/Provoker/DeathSounds/ProvokerDeathSound1.tscn")
 var death_sound_2 := preload("res://Rageborn/Attacks/Provoker/DeathSounds/ProvokerDeathSound2.tscn")
@@ -81,7 +83,10 @@ func update_targets_in_range():
 	
 func do_movement(delta: float):
 	var factor = 1 if targets_in_range.size() == 0 else 0
-	position += Vector2.DOWN * SPEED * delta * factor
+	var speed = SPEED * delta * factor
+	for buff in buffs:
+		speed = buff.modify_speed(speed)
+	position += Vector2.DOWN * speed
 	
 	
 func get_current_hp():
@@ -116,3 +121,11 @@ func throw_spear():
 	time_since_last_attack -= ATTACK_COOLDOWN
 	var spear = spear_scene.instance()
 	spear.init(self)
+	
+	
+func add_buff(buff):
+	buffs.append(buff)
+	
+	
+func remove_buff(buff):
+	buffs.erase(buff)

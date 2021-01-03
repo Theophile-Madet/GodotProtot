@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Player/Spells/FrostNova/iglooRoofRight.png" type="Texture" id=1]
 [ext_resource path="res://Player/Spells/FrostNova/FrostNova.gd" type="Script" id=2]
-[ext_resource path="res://Player/Spells/Heal/547365__eminyildirim__magic-aura-shimmer.wav" type="AudioStream" id=3]
+[ext_resource path="res://Player/Spells/FrostNova/FrostNovaChargeSound.wav" type="AudioStream" id=3]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 192.0

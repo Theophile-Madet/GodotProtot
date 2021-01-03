@@ -7,9 +7,11 @@ var current_charge : float
 var player : Node2D
 var direction: Vector2
 var main
+var enemies_in_range: Array
 
 var sound_cast: PackedScene = preload("../Fireball/FireballSoundCast.tscn")
 var sound_hit: PackedScene = preload("../Fireball/FireballSoundHit.tscn")
+var buff_scene := preload("FrostNovaBuff.tscn")
 
 enum FrostNovaState {
 	CHARGING,
@@ -27,8 +29,9 @@ func init(_player):
 func _ready():
 	current_charge = player.BACKSWING_DURATION
 	current_state = FrostNovaState.CHARGING
-	connect("body_entered", self, "enemy_hit")
-	connect("area_entered", self, "enemy_projectile_hit")
+	connect("body_entered", self, "enemy_entered")
+	connect("body_exited", self, "enemy_exited")
+#	connect("area_entered", self, "enemy_projectile_hit")
 	scale = Vector2(0 , 0)
 	input_action = "player_%s_rune_left" % player.player_index
 	$SoundCharge.play()
@@ -51,17 +54,21 @@ func cast():
 	monitoring = true
 	main.play_sound(sound_cast, position, get_sound_volume())
 	$SoundCharge.stop()
+	for enemy in enemies_in_range:
+		var direction_to_enemy = enemy.global_position - global_position
+		if abs(direction.angle_to(direction_to_enemy)) > PI / 4:
+			continue
+		var buff = buff_scene.instance()
+		buff.init(enemy)
 	queue_free()
 	
 	
-func enemy_hit(enemy: Node):
-	enemy.hit(current_charge)
-	main.play_sound(sound_hit, position, get_sound_volume())
+func enemy_entered(enemy: Node):
+	enemies_in_range.append(enemy)
 	
 	
-func enemy_projectile_hit(projectile: Area2D):
-	projectile.queue_free()
-	main.play_sound(sound_hit, position, get_sound_volume())
+func enemy_exited(enemy: Node):
+	enemies_in_range.erase(enemy)
 
 
 func get_sound_volume() -> float:

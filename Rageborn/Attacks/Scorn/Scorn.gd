@@ -11,6 +11,7 @@ var boulder_scene: PackedScene = preload("res://Rageborn/Attacks/Scorn/Boulder/S
 const ATTACK_COOLDOWN := 5
 var time_since_last_attack: float = 0
 var sound_pitch = 0.5 + randf()
+var buffs := []
 
 var summon_sound := preload("res://Rageborn/Attacks/SummonSound/SummonSound.tscn")
 var throw_sound := preload("res://Rageborn/Attacks/Scorn/ScornThrowSound.tscn")
@@ -85,3 +86,11 @@ func attack():
 	var boulder = boulder_scene.instance()
 	boulder.init(self)
 	main.play_sound(throw_sound, position, 0, 0.75 + randf() * 0.5)
+	
+
+func add_buff(buff):
+	buffs.append(buff)
+	
+	
+func remove_buff(buff):
+	buffs.erase(buff)
