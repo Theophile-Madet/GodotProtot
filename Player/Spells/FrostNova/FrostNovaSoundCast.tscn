@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Player/Spells/FrostNova/FrostNovaCastSound.wav" type="AudioStream" id=1]
+
+[node name="FrostNovaSoundCast" type="AudioStreamPlayer2D"]
+stream = ExtResource( 1 )

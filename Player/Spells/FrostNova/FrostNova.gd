@@ -9,8 +9,7 @@ var direction: Vector2
 var main
 var enemies_in_range: Array
 
-var sound_cast: PackedScene = preload("../Fireball/FireballSoundCast.tscn")
-var sound_hit: PackedScene = preload("../Fireball/FireballSoundHit.tscn")
+var sound_cast: PackedScene = preload("FrostNovaSoundCast.tscn")
 var buff_scene := preload("FrostNovaBuff.tscn")
 
 enum FrostNovaState {
