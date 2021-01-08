@@ -1,0 +1,213 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://Player/SkinChoiceUI/SkinChoiceUI.gd" type="Script" id=1]
+[ext_resource path="res://Kenney's Assets/Fonts/Kenney Rocket.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://Kenney's Assets/Game Icons Expansion/PNG/White/2x/joystickL_side.png" type="Texture" id=3]
+[ext_resource path="res://PlaceholderAssets/roguelike-characters-pack/Spritesheet/roguelikeChar_transparent.png" type="Texture" id=4]
+[ext_resource path="res://Kenney's Assets/Game Icons Expansion/PNG/White/2x/joystickR_side.png" type="Texture" id=5]
+[ext_resource path="res://Kenney's Assets/Game Icons Expansion/PNG/White/2x/DPAD_all.png" type="Texture" id=6]
+[ext_resource path="res://Kenney's Assets/Game Icons/PNG/White/2x/buttonB.png" type="Texture" id=7]
+[ext_resource path="res://Kenney's Assets/Game Icons/PNG/White/2x/buttonX.png" type="Texture" id=8]
+
+[sub_resource type="DynamicFont" id=1]
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 2 )
+
+[node name="SkinChoiceUI" type="Control"]
+margin_right = 960.0
+margin_bottom = 540.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="PlayerNumber" type="Label" parent="."]
+anchor_left = 0.5
+anchor_top = 0.2
+anchor_right = 0.5
+anchor_bottom = 0.2
+margin_left = -56.0001
+margin_top = -4.0
+margin_right = 58.0
+margin_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0.886275, 0.886275, 0.886275, 1 )
+text = "PLAYER 1"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="IconStickLeft" type="TextureRect" parent="."]
+margin_left = 64.0
+margin_top = 112.0
+margin_right = 164.0
+margin_bottom = 212.0
+texture = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Body" type="Sprite" parent="."]
+position = Vector2( 216, 152 )
+scale = Vector2( 6, 6 )
+texture = ExtResource( 4 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 16, 16 )
+
+[node name="LabelBody" type="Label" parent="."]
+anchor_left = 0.5
+anchor_top = 0.2
+anchor_right = 0.5
+anchor_bottom = 0.2
+margin_left = -360.0
+margin_top = 108.0
+margin_right = -246.0
+margin_bottom = 132.0
+grow_horizontal = 2
+grow_vertical = 2
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0.886275, 0.886275, 0.886275, 1 )
+text = "1 / 10"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="IconStickRight" type="TextureRect" parent="."]
+margin_left = 72.0
+margin_top = 280.0
+margin_right = 172.0
+margin_bottom = 380.0
+texture = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Head" type="Sprite" parent="."]
+position = Vector2( 216, 320 )
+scale = Vector2( 6, 6 )
+texture = ExtResource( 4 )
+region_enabled = true
+region_rect = Rect2( 392, 0, 16, 16 )
+
+[node name="LabelHead" type="Label" parent="."]
+anchor_left = 0.5
+anchor_top = 0.2
+anchor_right = 0.5
+anchor_bottom = 0.2
+margin_left = -360.0
+margin_top = 272.0
+margin_right = -246.0
+margin_bottom = 296.0
+grow_horizontal = 2
+grow_vertical = 2
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0.886275, 0.886275, 0.886275, 1 )
+text = "1 / 10"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="IconDPad" type="TextureRect" parent="."]
+margin_left = 696.0
+margin_top = 104.0
+margin_right = 796.0
+margin_bottom = 204.0
+texture = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Torso" type="Sprite" parent="."]
+position = Vector2( 840, 152 )
+scale = Vector2( 6, 6 )
+texture = ExtResource( 4 )
+region_enabled = true
+region_rect = Rect2( 103, 0, 16, 16 )
+
+[node name="LabelTorso" type="Label" parent="."]
+anchor_left = 0.5
+anchor_top = 0.2
+anchor_right = 0.5
+anchor_bottom = 0.2
+margin_left = 272.0
+margin_top = 104.0
+margin_right = 386.0
+margin_bottom = 128.0
+grow_horizontal = 2
+grow_vertical = 2
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0.886275, 0.886275, 0.886275, 1 )
+text = "1 / 10"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="IconX" type="TextureRect" parent="."]
+margin_left = 712.0
+margin_top = 280.0
+margin_right = 762.0
+margin_bottom = 330.0
+texture = ExtResource( 8 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Legs" type="Sprite" parent="."]
+position = Vector2( 816, 304 )
+scale = Vector2( 6, 6 )
+texture = ExtResource( 4 )
+region_enabled = true
+region_rect = Rect2( 52, 0, 16, 16 )
+
+[node name="IconY" type="TextureRect" parent="."]
+margin_left = 864.0
+margin_top = 280.0
+margin_right = 914.0
+margin_bottom = 330.0
+texture = ExtResource( 7 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LabelLegs" type="Label" parent="."]
+anchor_left = 0.5
+anchor_top = 0.2
+anchor_right = 0.5
+anchor_bottom = 0.2
+margin_left = 272.0
+margin_top = 260.0
+margin_right = 386.0
+margin_bottom = 284.0
+grow_horizontal = 2
+grow_vertical = 2
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0.886275, 0.886275, 0.886275, 1 )
+text = "1 / 10"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}

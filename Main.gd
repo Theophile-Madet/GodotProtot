@@ -1,15 +1,20 @@
 extends Node2D
 
+const Global = preload("res://GameState.gd")
 
 var viewport_size : Vector2
 var players : Array
 var hp_bar_scene := preload("res://HPBAR/HPBar.tscn")
 var player_scene := preload("Player/Player.tscn")
 var gravehold
+var game_state
+
+signal game_state_changed(new_state)
 
 func _ready():
 	randomize()
 	viewport_size = get_viewport_rect().size
+	game_state = GameState.GameState.CHOOSE_SKIN
 	
 	var tile_map_scene = preload("TileMap/TileMap.tscn")
 	add_child(tile_map_scene.instance())
@@ -18,6 +23,8 @@ func _ready():
 	var gravehold_scene = preload("res://Gravehold/Gravehold.tscn")
 	gravehold = gravehold_scene.instance()
 	add_child(gravehold)
+	
+	create_input_map()
 	
 	create_player(1)
 
@@ -74,3 +81,59 @@ func play_sound_from_file(path: String, position: Vector2, volume_db: float, pit
 	sound.pitch_scale = pitch_scale
 	sound.play()
 	return sound
+
+
+func create_input_map():
+	create_input_action_joypad_button("player_%s_rune_left", JOY_XBOX_X)
+	create_input_action_joypad_button("player_%s_rune_right", JOY_XBOX_B)
+	create_input_action_joypad_button("player_%s_rune_top", JOY_XBOX_Y)
+	create_input_action_joypad_button("player_%s_rune_bottom", JOY_XBOX_A)
+	
+	create_input_action_joypad_button("player_%s_start", JOY_START)
+	
+	create_input_action_joypad_axis("player_%s_left", JOY_ANALOG_LX, -1)
+	create_input_action_joypad_axis("player_%s_right", JOY_ANALOG_LX, 1)
+	create_input_action_joypad_axis("player_%s_up", JOY_ANALOG_LY, -1)
+	create_input_action_joypad_axis("player_%s_down", JOY_ANALOG_LY, 1)
+	
+	create_input_action_joypad_button("player_%s_left", JOY_DPAD_LEFT)
+	create_input_action_joypad_button("player_%s_right", JOY_DPAD_RIGHT)
+	create_input_action_joypad_button("player_%s_up", JOY_DPAD_UP)
+	create_input_action_joypad_button("player_%s_down", JOY_DPAD_DOWN)
+	
+	create_input_action_joypad_axis("player_%s_skin_Body_left", JOY_ANALOG_LX, -1)
+	create_input_action_joypad_axis("player_%s_skin_Body_right", JOY_ANALOG_LX, 1)
+	create_input_action_joypad_axis("player_%s_skin_Head_left", JOY_ANALOG_RX, -1)
+	create_input_action_joypad_axis("player_%s_skin_Head_right", JOY_ANALOG_RX, 1)
+	create_input_action_joypad_button("player_%s_skin_Torso_left", JOY_DPAD_LEFT)
+	create_input_action_joypad_button("player_%s_skin_Torso_right", JOY_DPAD_RIGHT)
+	create_input_action_joypad_button("player_%s_skin_Legs_left", JOY_XBOX_X)
+	create_input_action_joypad_button("player_%s_skin_Legs_right", JOY_XBOX_Y)
+	
+	
+
+func create_input_action_joypad_button(action_base: String, button_index: int):
+	for player_index in range(4):
+		var action := action_base % (player_index + 1)
+		create_action_if_necessary(action)
+		var event := InputEventJoypadButton.new()
+		event.device = player_index
+		event.button_index = button_index
+		InputMap.action_add_event(action, event)
+		
+
+func create_input_action_joypad_axis(action_base: String, axis: int, axis_value: float):
+	for player_index in range(4):
+		var action := action_base % (player_index + 1)
+		create_action_if_necessary(action)
+		var event := InputEventJoypadMotion.new()
+		event.device = player_index
+		event.axis = axis
+		event.axis_value = axis_value
+		InputMap.action_add_event(action, event)
+		
+
+func create_action_if_necessary(action: String):
+	if InputMap.has_action(action):
+		return
+	InputMap.add_action(action)

@@ -135,35 +135,41 @@ local_coords = false
 process_material = ExtResource( 14 )
 texture = ExtResource( 15 )
 
-[node name="Body" type="Sprite" parent="."]
+[node name="PlayerSkin" type="Node2D" parent="."]
+script = ExtResource( 16 )
+
+[node name="Body" type="Sprite" parent="PlayerSkin"]
 scale = Vector2( 3, 3 )
 texture = ExtResource( 2 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 16, 16 )
-script = ExtResource( 16 )
 
-[node name="Armor" type="Sprite" parent="Body"]
+[node name="Torso" type="Sprite" parent="PlayerSkin"]
+scale = Vector2( 3, 3 )
 texture = ExtResource( 2 )
 region_enabled = true
 region_rect = Rect2( 103, 0, 16, 16 )
 
-[node name="Legs" type="Sprite" parent="Body"]
+[node name="Legs" type="Sprite" parent="PlayerSkin"]
+scale = Vector2( 3, 3 )
 texture = ExtResource( 2 )
 region_enabled = true
 region_rect = Rect2( 52, 0, 16, 16 )
 
-[node name="Head" type="Sprite" parent="Body"]
+[node name="Head" type="Sprite" parent="PlayerSkin"]
+scale = Vector2( 3, 3 )
 texture = ExtResource( 2 )
 region_enabled = true
 region_rect = Rect2( 324, 0, 16, 16 )
 
-[node name="Staff" type="Sprite" parent="Body"]
-position = Vector2( -1, 0 )
+[node name="Staff" type="Sprite" parent="PlayerSkin"]
+position = Vector2( -3, 0 )
+scale = Vector2( 3, 3 )
 texture = ExtResource( 2 )
 region_enabled = true
 region_rect = Rect2( 800, 137, 16, 16 )
 
-[node name="Particles2D" type="Particles2D" parent="Body/Staff"]
+[node name="Particles2D" type="Particles2D" parent="PlayerSkin/Staff"]
 position = Vector2( -5.31438, -2.59659 )
 amount = 4
 lifetime = 0.5

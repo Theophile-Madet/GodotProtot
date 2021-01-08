@@ -2,6 +2,7 @@ extends Node2D
 
 class_name Player
 
+
 const SPEED: float = 400.0
 var sprite_size : Vector2
 onready var main = get_node("/root/Main")
@@ -24,6 +25,8 @@ const feral_lightning_scene : PackedScene = preload("Spells/FeralLightning/Feral
 const heal_scene : PackedScene = preload("Spells/Heal/Heal.tscn")
 const frost_nova_scene : PackedScene = preload("Spells/FrostNova/FrostNova.tscn")
 
+const skin_choice_scene : PackedScene = preload("SkinChoiceUI/SkinChoiceUI.tscn")
+var skin_choice_ui: Control
 
 enum PlayerState {
 	MOVING,
@@ -39,17 +42,24 @@ func init(_player_index: int):
 	
 	
 func _ready():
-	sprite_size = $Body.region_rect.size
+	sprite_size = $PlayerSkin/Body.region_rect.size
 	position.x = main.viewport_size.x / 2
 	position.y = main.viewport_size.y * 3 / 4
 	main.players.append(self)
 	main.add_hp_bar(self)
 	current_state = PlayerState.MOVING
-	skin = get_node("Body")
+	skin = $PlayerSkin
 	skin.init(self)
+	main.connect("game_state_changed", self, "on_game_state_changed")
+	skin_choice_ui = skin_choice_scene.instance()
+	skin_choice_ui.init(self)
+	on_game_state_changed(main.game_state)
 	
 	
 func _process(delta: float):
+	if main.game_state != GameState.GameState.FIGHT:
+		return
+		
 	update_look_direction()
 	if current_state == PlayerState.MOVING:
 		do_movement(delta)
@@ -175,3 +185,23 @@ func get_current_hp():
 func get_max_hp():
 	return MAX_HP
 
+
+func on_game_state_changed(new_state):
+	match new_state:
+		GameState.GameState.CHOOSE_SKIN:
+			$PlayerSkin.scale = Vector2.ONE * 2
+			set_ui_position()
+			skin_choice_ui.visible = true
+		GameState.GameState.FIGHT:
+			$PlayerSkin.scale = Vector2.ONE * 3
+			skin_choice_ui.visible = false
+
+
+func set_ui_position():
+	var x_pos = main.viewport_size.x / 4
+	if player_index == 2 or player_index == 4:
+		x_pos *= 3
+	var y_pos = main.viewport_size.y / 4
+	if player_index == 3 or player_index == 4:
+		y_pos *= 3
+	global_position = Vector2(x_pos, y_pos)
