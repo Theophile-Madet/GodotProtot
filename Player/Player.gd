@@ -9,7 +9,7 @@ onready var main = get_node("/root/Main")
 
 const SIZE := 48
 const MAX_HP = 10
-var hp: float = MAX_HP / 2
+var hp: float = MAX_HP
 var current_look_direction: Vector2 = Vector2.UP
 var current_move_direction: Vector2
 var current_spell: Node2D
@@ -57,7 +57,7 @@ func _ready():
 	
 	
 func _process(delta: float):
-	if main.game_state != GameState.GameState.FIGHT:
+	if main.game_state == GameState.GameState.CHOOSE_SKIN:
 		return
 		
 	update_look_direction()
@@ -192,7 +192,7 @@ func on_game_state_changed(new_state):
 			$PlayerSkin.scale = Vector2.ONE * 2
 			set_ui_position()
 			skin_choice_ui.visible = true
-		GameState.GameState.FIGHT:
+		_:
 			$PlayerSkin.scale = Vector2.ONE * 1
 			skin_choice_ui.visible = false
 

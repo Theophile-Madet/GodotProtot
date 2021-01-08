@@ -31,10 +31,14 @@ func _ready():
 
 	
 func _process(delta: float):
-	if Input.is_action_just_pressed("start_rageborne") and rageborne == null:
-		add_child(rageborn_scene.instance())
-		game_state = GameState.GameState.FIGHT
-		emit_signal("game_state_changed", game_state)
+	if Input.is_action_just_pressed("start_rageborne"):
+		if game_state == GameState.GameState.CHOOSE_SKIN:
+			game_state = GameState.GameState.PREPARE
+			emit_signal("game_state_changed", game_state)
+		elif game_state == GameState.GameState.PREPARE:
+			game_state = GameState.GameState.FIGHT
+			add_child(rageborn_scene.instance())
+			emit_signal("game_state_changed", game_state)
 	if Input.is_key_pressed(KEY_ESCAPE):
 		get_tree().quit()
 	for index in [2, 3]:

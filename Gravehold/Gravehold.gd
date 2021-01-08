@@ -24,3 +24,5 @@ func get_max_hp():
 
 func hit(damage: float):
 	hp -= damage
+	if hp <= 0:
+		main.add_child(load("res://LooseScene.tscn").instance())

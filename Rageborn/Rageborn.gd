@@ -1,8 +1,11 @@
 extends Node2D
 
 const SIZE := 60
-const ATTACK_COOLDOWN := 10
-var time_since_last_attack: float = ATTACK_COOLDOWN - 0.5
+const MINION_ATTACK_COOLDOWN := 10
+var time_since_last_minion_attack: float = MINION_ATTACK_COOLDOWN - 5
+
+const SPELL_ATTACK_COOLDOWN := 7
+var time_since_last_spell_attack: float = MINION_ATTACK_COOLDOWN - 2
 
 onready var main = get_node("/root/Main")
 
@@ -12,10 +15,10 @@ var laser_scene: PackedScene = preload("Attacks/Laser/Laser.tscn")
 var provoker_scene: PackedScene = preload("Attacks/Provoker/Provoker.tscn")
 var bloodcry_scene: PackedScene = preload("Attacks/BloodCry/BloodCry.tscn")
 var scorn_scene: PackedScene = preload("Attacks/Scorn/Scorn.tscn")
-#var attack_scenes = [laser_scene, provoker_scene, bloodcry_scene, scorn_scene]
-var attack_scenes = [provoker_scene]
+var minion_scenes = [provoker_scene, scorn_scene]
+var spell_scenes = [laser_scene, bloodcry_scene]
 
-var MAX_HP := 50
+var MAX_HP := 5
 var hp
 
 	
@@ -27,16 +30,45 @@ func _ready():
 
 
 func _process(delta: float):
-	time_since_last_attack += delta
+	if hp <= 0:
+		return
+	time_since_last_minion_attack += delta
+	if time_since_last_minion_attack > MINION_ATTACK_COOLDOWN:
+		time_since_last_minion_attack -= MINION_ATTACK_COOLDOWN
+		minion_attack()
+		
+	time_since_last_spell_attack += delta
+	if time_since_last_spell_attack > SPELL_ATTACK_COOLDOWN:
+		time_since_last_spell_attack -= SPELL_ATTACK_COOLDOWN
+		spell_attack()
+
+
+func minion_attack():
+	var attack_scene = minion_scenes[randi() % minion_scenes.size()]
 	
-	if time_since_last_attack > ATTACK_COOLDOWN:
-		time_since_last_attack -= ATTACK_COOLDOWN
-		attack()
+	var nb_attacks := 0
+	match attack_scene:
+		provoker_scene:
+			nb_attacks = 4
+		scorn_scene:
+			nb_attacks = 2
+		bloodcry_scene:
+			nb_attacks = 1
+			
+	for i in range(nb_attacks):
+		attack_scene.instance().init(self)
+		
 
-
-func attack():
-	var attack = attack_scenes[randi() % attack_scenes.size()]
-	attack.instance().init(self)
+func spell_attack():
+	var attack_scene = spell_scenes[randi() % spell_scenes.size()]
+	
+	var nb_attacks := 0
+	match attack_scene:
+		laser_scene:
+			nb_attacks = randi() % main.players.size()
+			
+	for i in range(nb_attacks):
+		attack_scene.instance().init(self)
 
 	
 func get_current_hp():
@@ -50,6 +82,8 @@ func get_max_hp():
 func hit(damage: float):
 	hp -= damage
 	hp = clamp(hp, 0, MAX_HP)
+	if hp <= 0:
+		main.add_child(load("res://WinScene.tscn").instance())
 	
 
 func add_buff(buff):
