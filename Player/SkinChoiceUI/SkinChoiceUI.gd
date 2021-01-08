@@ -6,6 +6,7 @@ onready var player_skin: PlayerSkin = player.get_node("PlayerSkin")
 var player_sprites := {}
 var ui_sprites := {}
 var labels := {}
+var tweens = {}
 
 const parts = ["Body", "Head", "Torso", "Legs"]
 
@@ -46,12 +47,26 @@ func _process(_delta):
 	
 func update_ui(part: String):
 	labels[part].text = "%s / %s" % [player_skin.current_region[part] + 1, player_skin.regions[part].size()]
+	
+	var tween: Tween
+	
+	if !tweens.has(part):
+		tween = Tween.new()
+		add_child(tween)
+		tweens[part] = tween
+		
+	tween = tweens[part]
+	var sprite: Sprite = ui_sprites[part]
+	tween.stop(sprite, "region_rect:position")
+	var target_region = player_skin.regions[part][player_skin.current_region[part]]
+	tween.interpolate_property(sprite, "region_rect:position", sprite.region_rect.position, target_region, 0.4, Tween.TRANS_SINE, Tween.EASE_OUT, 0)
+	tween.start()
+	
 	ui_sprites[part].region_rect.position = player_skin.sprites[part].region_rect.position
 
 
 func set_sprite_region(part: String, delta: int):
 	var region_index = player_skin.current_region[part]
 	region_index = posmod(region_index + delta, player_skin.regions[part].size())
-	print("SET REGION INDEX %s %s" % [region_index, player_skin.regions[part].size()])
 	player_skin.set_part_region(part, region_index)
 	update_ui(part)

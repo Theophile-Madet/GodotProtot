@@ -41,7 +41,7 @@ func randomize_sprite(part: String) -> int:
 	
 
 func set_part_region(part: String, region_index: int):
-	sprites[part].region_rect.position = regions[part][region_index]
+	sprites[part].region_rect.position = regions[part][region_index]	
 	current_region[part] = region_index
 	
 	
