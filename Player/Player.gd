@@ -211,6 +211,8 @@ func end_backswing():
 	
 func hit(damage: float):
 	hp -= damage
+	if hp < 0 :
+		main.gravehold.hit(-hp * 2)
 	hp = clamp(hp, 0, MAX_HP)
 	if damage > 0:
 		var index = (randi() % voice_max_index) + 1
