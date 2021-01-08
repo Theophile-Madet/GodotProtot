@@ -6,8 +6,12 @@ var viewport_size : Vector2
 var players : Array
 var hp_bar_scene := preload("res://HPBAR/HPBar.tscn")
 var player_scene := preload("Player/Player.tscn")
+var rageborn_scene = preload("Rageborn/Rageborn.tscn")
+var tile_map_scene = preload("TileMap/TileMap.tscn")
+var gravehold_scene = preload("res://Gravehold/Gravehold.tscn")
 var gravehold
 var game_state
+var rageborne = null
 
 signal game_state_changed(new_state)
 
@@ -16,11 +20,8 @@ func _ready():
 	viewport_size = get_viewport_rect().size
 	game_state = GameState.GameState.CHOOSE_SKIN
 	
-	var tile_map_scene = preload("TileMap/TileMap.tscn")
+	
 	add_child(tile_map_scene.instance())
-	var rageborn_scene = preload("Rageborn/Rageborn.tscn")
-	add_child(rageborn_scene.instance())
-	var gravehold_scene = preload("res://Gravehold/Gravehold.tscn")
 	gravehold = gravehold_scene.instance()
 	add_child(gravehold)
 	
@@ -30,6 +31,10 @@ func _ready():
 
 	
 func _process(delta: float):
+	if Input.is_action_just_pressed("start_rageborne") and rageborne == null:
+		add_child(rageborn_scene.instance())
+		game_state = GameState.GameState.FIGHT
+		emit_signal("game_state_changed", game_state)
 	if Input.is_key_pressed(KEY_ESCAPE):
 		get_tree().quit()
 	for index in [2, 3]:
@@ -108,7 +113,7 @@ func create_input_map():
 	create_input_action_joypad_button("player_%s_skin_Torso_left", JOY_DPAD_LEFT)
 	create_input_action_joypad_button("player_%s_skin_Torso_right", JOY_DPAD_RIGHT)
 	create_input_action_joypad_button("player_%s_skin_Legs_left", JOY_XBOX_X)
-	create_input_action_joypad_button("player_%s_skin_Legs_right", JOY_XBOX_Y)
+	create_input_action_joypad_button("player_%s_skin_Legs_right", JOY_XBOX_B)
 	
 	
 

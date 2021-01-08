@@ -193,7 +193,7 @@ func on_game_state_changed(new_state):
 			set_ui_position()
 			skin_choice_ui.visible = true
 		GameState.GameState.FIGHT:
-			$PlayerSkin.scale = Vector2.ONE * 3
+			$PlayerSkin.scale = Vector2.ONE * 1
 			skin_choice_ui.visible = false
 
 
