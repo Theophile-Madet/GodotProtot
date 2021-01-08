@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://PlaceholderAssets/roguelike-characters-pack/Spritesheet/roguelikeChar_transparent.png" type="Texture" id=2]
@@ -15,6 +15,7 @@
 [ext_resource path="res://Player/RuneParticles/ParticlesRuneBlueCharge.tres" type="Material" id=13]
 [ext_resource path="res://Player/RuneParticles/ParticlesRuneBlueCast.tres" type="Material" id=14]
 [ext_resource path="res://PlaceholderAssets/PlanetCutePNG/Gem Blue.png" type="Texture" id=15]
+[ext_resource path="res://Player/PlayerSkin.gd" type="Script" id=16]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 24, 24 )
@@ -139,6 +140,7 @@ scale = Vector2( 3, 3 )
 texture = ExtResource( 2 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 16, 16 )
+script = ExtResource( 16 )
 
 [node name="Armor" type="Sprite" parent="Body"]
 texture = ExtResource( 2 )

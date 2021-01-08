@@ -15,8 +15,8 @@ var current_spell: Node2D
 var current_charge_particle: Node2D
 var current_cast_particle: Node2D
 var player_index: int
-var voice: String
-var voice_max_index: int
+var skin
+
 
 const BACKSWING_DURATION = 0.5
 const fireball_scene : PackedScene = preload("Spells/Fireball/Fireball.tscn")
@@ -24,10 +24,6 @@ const feral_lightning_scene : PackedScene = preload("Spells/FeralLightning/Feral
 const heal_scene : PackedScene = preload("Spells/Heal/Heal.tscn")
 const frost_nova_scene : PackedScene = preload("Spells/FrostNova/FrostNova.tscn")
 
-var body_regions := []
-var armor_regions := []
-var legs_regions := []
-var head_regions := []
 
 enum PlayerState {
 	MOVING,
@@ -40,33 +36,6 @@ var current_state
 
 func init(_player_index: int):
 	player_index = _player_index
-	build_sprite_regions()
-	
-
-func build_sprite_regions():
-	for y in range(0, 3):
-		body_regions.append(Vector2(17, 17 * y))
-	for x in range(6, 14):
-		for y in range(0, 10):
-			armor_regions.append(Vector2(17 * x + 1, 17 * y))
-	for x in range(14, 18):
-		for y in range(0, 5):
-			armor_regions.append(Vector2(17 * x + 1, 17 * y))
-	armor_regions.append(Vector2(902, 187))
-	for x in range(3, 5):
-		for y in range(0, 10):
-			legs_regions.append(Vector2(17 * x + 1, 17 * y))
-	legs_regions.append(Vector2(902, 187))
-	for x in range(19, 23):
-		for y in range(0, 12):
-			head_regions.append(Vector2(17 * x + 1, 17 * y))
-	for x in range(23, 27):
-		for y in range(0, 8):
-			head_regions.append(Vector2(17 * x + 1, 17 * y))
-	for x in range(28, 32):
-		for y in range(0, 9):
-			head_regions.append(Vector2(17 * x + 1, 17 * y))
-	head_regions.append(Vector2(902, 187))
 	
 	
 func _ready():
@@ -76,22 +45,8 @@ func _ready():
 	main.players.append(self)
 	main.add_hp_bar(self)
 	current_state = PlayerState.MOVING
-	randomize_sprite($Body, body_regions)
-	randomize_sprite($Body/Armor, armor_regions)
-	randomize_sprite($Body/Legs, legs_regions)
-	randomize_sprite($Body/Head, head_regions)
-	if randf() > 0.5:
-		voice = "Female"
-		voice_max_index = 36
-	else:
-		voice = "Male"
-		voice_max_index = 11
-
-
-func randomize_sprite(part: Sprite, regions: Array):
-	part.region_enabled = true
-	part.region_rect.position = regions[randi() % regions.size()]
-	pass
+	skin = get_node("Body")
+	skin.init(self)
 	
 	
 func _process(delta: float):
@@ -100,11 +55,6 @@ func _process(delta: float):
 		do_movement(delta)
 	if current_state == PlayerState.MOVING or current_state == PlayerState.CASTING:
 		do_spells(delta)
-	if Input.is_action_just_pressed("player_%s_randomize_skin" % player_index):
-		randomize_sprite($Body, body_regions)
-		randomize_sprite($Body/Armor, armor_regions)
-		randomize_sprite($Body/Legs, legs_regions)
-		randomize_sprite($Body/Head, head_regions)
 	
 
 func update_look_direction():
@@ -215,9 +165,7 @@ func hit(damage: float):
 		main.gravehold.hit(-hp * 2)
 	hp = clamp(hp, 0, MAX_HP)
 	if damage > 0:
-		var index = (randi() % voice_max_index) + 1
-		var path := "res://Player/Sounds/%sHurt/S-%s.wav" % [voice, index]	
-		main.play_sound_from_file(path, position, 0)
+		skin.play_hit_sound()
 	
 
 func get_current_hp():
