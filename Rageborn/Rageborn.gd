@@ -1,7 +1,7 @@
 extends Node2D
 
 const SIZE := 60
-const MINION_ATTACK_COOLDOWN := 15
+const MINION_ATTACK_COOLDOWN := 5
 var time_since_last_minion_attack: float = MINION_ATTACK_COOLDOWN - 5
 
 const SPELL_ATTACK_COOLDOWN := 7

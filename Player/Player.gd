@@ -178,6 +178,9 @@ func hit(damage: float):
 	hp = clamp(hp, 0, MAX_HP)
 	if damage > 0:
 		skin.play_hit_sound()
+		var ratio = damage / 5.0
+		ratio = clamp(ratio, 0, 1)
+		Input.start_joy_vibration(player_index - 1, 1 - ratio, ratio, max(0.4 * ratio, 0.1))
 	
 
 func get_current_hp():
