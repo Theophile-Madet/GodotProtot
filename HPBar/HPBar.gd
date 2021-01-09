@@ -1,4 +1,4 @@
-extends TextureProgress
+extends ColorRect
 
 var target : Node2D
 
@@ -13,7 +13,7 @@ func _ready():
 	
 	
 func _process(_delta):
-	max_value = target.get_max_hp()
-	rect_size.x = max_value * 2
+	$HP.max_value = target.get_max_hp()
+	rect_size.x = $HP.max_value * 4
 	rect_position.x = - rect_size.x / 2
-	value = target.get_current_hp()
+	$HP.value = target.get_current_hp()
