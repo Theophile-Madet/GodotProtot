@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/survival_mode.ogg-bbfab09fd2acef525518e47919ccd28d.oggstr"
+
+[deps]
+
+source_file="res://Kenney's Assets/Audio/Voiceover Pack Fighter/Audio/survival_mode.ogg"
+dest_files=[ "res://.import/survival_mode.ogg-bbfab09fd2acef525518e47919ccd28d.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

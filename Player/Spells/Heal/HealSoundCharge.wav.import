@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/HealSoundCharge.wav-ba8de5dc02743373e2556c44892da396.sample"
+
+[deps]
+
+source_file="res://Player/Spells/Heal/HealSoundCharge.wav"
+dest_files=[ "res://.import/HealSoundCharge.wav-ba8de5dc02743373e2556c44892da396.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

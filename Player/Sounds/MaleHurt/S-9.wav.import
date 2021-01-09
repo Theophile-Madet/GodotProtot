@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/S-9.wav-5457b3b7ba97a0e54030d0b95e02920d.sample"
+
+[deps]
+
+source_file="res://Player/Sounds/MaleHurt/S-9.wav"
+dest_files=[ "res://.import/S-9.wav-5457b3b7ba97a0e54030d0b95e02920d.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

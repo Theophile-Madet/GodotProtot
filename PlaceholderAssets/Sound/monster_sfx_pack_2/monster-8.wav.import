@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/monster-8.wav-a953ec1c0742c6790db598a3cfd6f058.sample"
+
+[deps]
+
+source_file="res://PlaceholderAssets/Sound/monster_sfx_pack_2/monster-8.wav"
+dest_files=[ "res://.import/monster-8.wav-a953ec1c0742c6790db598a3cfd6f058.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

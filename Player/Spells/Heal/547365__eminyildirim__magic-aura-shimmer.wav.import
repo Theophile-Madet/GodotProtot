@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/547365__eminyildirim__magic-aura-shimmer.wav-3efc5ef14d6ed6cddec35b27757b9b80.sample"
+
+[deps]
+
+source_file="res://Player/Spells/Heal/547365__eminyildirim__magic-aura-shimmer.wav"
+dest_files=[ "res://.import/547365__eminyildirim__magic-aura-shimmer.wav-3efc5ef14d6ed6cddec35b27757b9b80.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

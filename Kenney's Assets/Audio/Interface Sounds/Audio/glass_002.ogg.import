@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/glass_002.ogg-0b2770ccab4c021f64d1d0f93a8ce3a2.oggstr"
+
+[deps]
+
+source_file="res://Kenney's Assets/Audio/Interface Sounds/Audio/glass_002.ogg"
+dest_files=[ "res://.import/glass_002.ogg-0b2770ccab4c021f64d1d0f93a8ce3a2.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

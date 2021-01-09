@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/78457__sancho82__bum.wav-cd00df256393bef51f7e44c32de46729.sample"
+
+[deps]
+
+source_file="res://PlaceholderAssets/Sound/78457__sancho82__bum.wav"
+dest_files=[ "res://.import/78457__sancho82__bum.wav-cd00df256393bef51f7e44c32de46729.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

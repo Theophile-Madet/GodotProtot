@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/painb.wav-0bbd6e86a220c8931927a22f6411e5dd.sample"
+
+[deps]
+
+source_file="res://PlaceholderAssets/Sound/michelbaradari-monsters/monster/painb.wav"
+dest_files=[ "res://.import/painb.wav-0bbd6e86a220c8931927a22f6411e5dd.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

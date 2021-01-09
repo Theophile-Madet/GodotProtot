@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/SummonSound.wav-d11bd93dc070b303e57efa6e379326a2.sample"
+
+[deps]
+
+source_file="res://Rageborn/Attacks/SummonSound/SummonSound.wav"
+dest_files=[ "res://.import/SummonSound.wav-d11bd93dc070b303e57efa6e379326a2.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

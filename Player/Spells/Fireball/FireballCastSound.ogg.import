@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/FireballCastSound.ogg-77f4cda604663869c36904bd78ff07cd.oggstr"
+
+[deps]
+
+source_file="res://Player/Spells/Fireball/FireballCastSound.ogg"
+dest_files=[ "res://.import/FireballCastSound.ogg-77f4cda604663869c36904bd78ff07cd.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/paind.wav-40eecdb7c39eee3ef96200ab592aa7fc.sample"
+
+[deps]
+
+source_file="res://PlaceholderAssets/Sound/michelbaradari-monsters/monster/paind.wav"
+dest_files=[ "res://.import/paind.wav-40eecdb7c39eee3ef96200ab592aa7fc.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

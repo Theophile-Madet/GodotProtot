@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/woosh2.ogg-7ac7971c2befdb0db0344f9d4d89a2b8.oggstr"
+
+[deps]
+
+source_file="res://Rageborn/Attacks/Provoker/ThrowSounds/Woosh (8 sounds)/woosh2.ogg"
+dest_files=[ "res://.import/woosh2.ogg-7ac7971c2befdb0db0344f9d4d89a2b8.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

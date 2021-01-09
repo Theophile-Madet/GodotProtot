@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://PlaceholderAssets/Sound/78457__sancho82__bum.wav" type="AudioStream" id=1]
+
+[node name="SoundHit" type="AudioStreamPlayer2D"]
+stream = ExtResource( 1 )

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://PlaceholderAssets/Sound/michelbaradari-monsters/monster/deathb.wav" type="AudioStream" id=1]
+
+[node name="ProvokerDeathSound1" type="AudioStreamPlayer2D"]
+stream = ExtResource( 1 )

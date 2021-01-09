@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/you_lose.ogg-2f06c82beb839b7fbfc3a8829b31fa49.oggstr"
+
+[deps]
+
+source_file="res://Kenney's Assets/Audio/Voiceover Pack Fighter/Audio/you_lose.ogg"
+dest_files=[ "res://.import/you_lose.ogg-2f06c82beb839b7fbfc3a8829b31fa49.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
