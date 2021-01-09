@@ -1,0 +1,27 @@
+TODO
+-Different levels
+-Start menu / Better level start menus
+-Particles on spell hit
+-Effect on player hit
+-Make testing easier (key to spawn enemy...)
+-Add blood on hit
+-Notify death
+-Boss melee attack to prevent camping in front of it
+-FeralLightning doesn't always hit
+-Freeze should prevent shooting
+-Make bloodcry slow and targeted
+-Make heal stronger / different
+-Make charging exponential?
+-Make dead damage go to other players (and visualize it) instead of gravehold
+-Make spells visible on all backgrounds (green on heal)
+-Melee attacks on scorns
+-Decharge projectiles instead of destroy on hit
+-Make fireball slightly targeted
+
+DONE
+-Make hp bar more readable
+-Damage feedback numbers
+-Player skin choose menu
+-Move player skin random to it's own script
+-Use online git
+-Vibrate controller on hit
