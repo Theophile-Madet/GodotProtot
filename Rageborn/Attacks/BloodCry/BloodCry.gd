@@ -106,6 +106,7 @@ func hit(damage: float):
 	main.show_damage_number(hp - hp_before, global_position)
 	if hp <= 0:
 		queue_free()
+
 		
 func add_buff(buff):
 	pass
