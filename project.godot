@@ -125,6 +125,7 @@ start_rageborne={
 2d_physics/layer_3="player_spells"
 2d_physics/layer_4="enemy_spells"
 2d_physics/layer_5="gravehold"
+2d_physics/layer_6="rocks"
 
 [rendering]
 

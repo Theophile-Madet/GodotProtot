@@ -1,7 +1,7 @@
 extends Area2D
 
 
-const SPEED := 1000
+const SPEED := 300
 var target: Node2D
 var direction: Vector2
 
@@ -19,12 +19,12 @@ func init(bloodcry: Node2D):
 
 
 func _process(delta: float):
-	direction = lerp(direction, (target.global_position - global_position).normalized(), delta * 2)
+	direction = lerp(direction, (target.global_position - global_position).normalized(), delta * 1)
 	direction = direction.normalized()
 	rotation = direction.angle()
 	position += direction * delta * SPEED
 
 
 func on_body_touched(body: RigidBody2D):
-	body.hit(1)
+	body.hit(3)
 	queue_free()

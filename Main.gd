@@ -4,6 +4,7 @@ const Global = preload("res://GameState.gd")
 
 var viewport_size : Vector2
 var players : Array
+var damage_number_scene := preload("res://DamageNumber.tscn")
 var hp_bar_scene := preload("res://HPBAR/HPBar.tscn")
 var player_scene := preload("Player/Player.tscn")
 var rageborn_scene = preload("Rageborn/Rageborn.tscn")
@@ -146,3 +147,7 @@ func create_action_if_necessary(action: String):
 	if InputMap.has_action(action):
 		return
 	InputMap.add_action(action)
+	
+	
+func show_damage_number(damage: float, global_position: Vector2):
+	damage_number_scene.instance().init(self, damage, global_position)

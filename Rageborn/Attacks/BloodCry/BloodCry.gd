@@ -2,7 +2,7 @@ extends RigidBody2D
 
 
 const SIZE := 64
-const CHARGE_TIME := 10
+const CHARGE_TIME := 20
 
 const TWEEN_X_DURATION = 1.6
 const TWEEN_Y_DURATION = 2.1
@@ -101,6 +101,11 @@ func get_max_hp():
 
 
 func hit(damage: float):
+	var hp_before = hp
 	hp -= damage
+	main.show_damage_number(hp - hp_before, global_position)
 	if hp <= 0:
 		queue_free()
+		
+func add_buff(buff):
+	pass

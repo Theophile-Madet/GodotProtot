@@ -4,7 +4,7 @@ const SPEED = 0
 const SIZE = 48
 
 
-const MAX_HP:= 9
+const MAX_HP:= 3
 var hp: float = MAX_HP
 var main
 var boulder_scene: PackedScene = preload("res://Rageborn/Attacks/Scorn/Boulder/ScornBoulder.tscn")
@@ -70,7 +70,9 @@ func get_max_hp():
 	
 	
 func hit(damage: float):
+	var hp_before = hp
 	hp -= damage
+	main.show_damage_number(hp - hp_before, global_position)
 	var sounds: Array
 	if hp <= 0:
 		sounds = death_sounds

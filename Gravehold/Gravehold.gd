@@ -3,7 +3,7 @@ extends RigidBody2D
 class_name Gravehold
 
 const SIZE := 300
-const MAX_HP := 30
+const MAX_HP := 60
 var hp: float = MAX_HP
 
 onready var main = get_node("/root/Main")
@@ -23,6 +23,8 @@ func get_max_hp():
 
 
 func hit(damage: float):
+	var hp_before = hp
 	hp -= damage
+	main.show_damage_number(hp - hp_before, global_position)
 	if hp <= 0:
 		main.add_child(load("res://LooseScene.tscn").instance())

@@ -8,7 +8,7 @@ var sprite_size : Vector2
 onready var main = get_node("/root/Main")
 
 const SIZE := 48
-const MAX_HP = 10
+const MAX_HP = 20
 var hp: float = MAX_HP
 var current_look_direction: Vector2 = Vector2.UP
 var current_move_direction: Vector2
@@ -19,7 +19,7 @@ var player_index: int
 var skin
 
 
-const BACKSWING_DURATION = 0.5
+const BACKSWING_DURATION = 0.01
 const fireball_scene : PackedScene = preload("Spells/Fireball/Fireball.tscn")
 const feral_lightning_scene : PackedScene = preload("Spells/FeralLightning/FeralLightning.tscn")
 const heal_scene : PackedScene = preload("Spells/Heal/Heal.tscn")
@@ -170,7 +170,9 @@ func end_backswing():
 	
 	
 func hit(damage: float):
+	var hp_before = hp
 	hp -= damage
+	main.show_damage_number(hp - hp_before, global_position)
 	if hp < 0 :
 		main.gravehold.hit(-hp * 2)
 	hp = clamp(hp, 0, MAX_HP)

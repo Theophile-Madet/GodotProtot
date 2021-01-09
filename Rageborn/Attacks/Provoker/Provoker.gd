@@ -10,7 +10,7 @@ enum ProvokerState {
 }
 var current_state = ProvokerState.SPAWNING
 
-const MAX_HP:= 5
+const MAX_HP:= 1
 var hp: float = MAX_HP
 var main
 var targets_in_range: Array = []
@@ -36,7 +36,7 @@ func init(rageborne):
 	main = rageborne.main
 	main.add_child(self)
 	var spawn_position = Vector2.RIGHT
-	spawn_position *= 70 + 70 * randf()
+	spawn_position *= 70 + 400 * randf()
 	spawn_position = spawn_position.rotated(PI * randf())
 	global_position = rageborne.global_position + spawn_position
 	
@@ -98,7 +98,9 @@ func get_max_hp():
 	
 	
 func hit(damage: float):
+	var hp_before = hp
 	hp -= damage
+	main.show_damage_number(hp - hp_before, global_position)
 	var sounds: Array
 	if hp <= 0:
 		sounds = death_sounds

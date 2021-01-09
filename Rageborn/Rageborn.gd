@@ -1,7 +1,7 @@
 extends Node2D
 
 const SIZE := 60
-const MINION_ATTACK_COOLDOWN := 10
+const MINION_ATTACK_COOLDOWN := 15
 var time_since_last_minion_attack: float = MINION_ATTACK_COOLDOWN - 5
 
 const SPELL_ATTACK_COOLDOWN := 7
@@ -18,7 +18,7 @@ var scorn_scene: PackedScene = preload("Attacks/Scorn/Scorn.tscn")
 var minion_scenes = [provoker_scene, scorn_scene]
 var spell_scenes = [laser_scene, bloodcry_scene]
 
-var MAX_HP := 5
+var MAX_HP := 100
 var hp
 
 	
@@ -49,11 +49,9 @@ func minion_attack():
 	var nb_attacks := 0
 	match attack_scene:
 		provoker_scene:
-			nb_attacks = 4
+			nb_attacks = 8
 		scorn_scene:
 			nb_attacks = 2
-		bloodcry_scene:
-			nb_attacks = 1
 			
 	for i in range(nb_attacks):
 		attack_scene.instance().init(self)
@@ -66,6 +64,8 @@ func spell_attack():
 	match attack_scene:
 		laser_scene:
 			nb_attacks = randi() % main.players.size()
+		bloodcry_scene:
+			nb_attacks = 1
 			
 	for i in range(nb_attacks):
 		attack_scene.instance().init(self)
@@ -80,7 +80,9 @@ func get_max_hp():
 	
 	
 func hit(damage: float):
+	var hp_before = hp
 	hp -= damage
+	main.show_damage_number(hp - hp_before, global_position)
 	hp = clamp(hp, 0, MAX_HP)
 	if hp <= 0:
 		main.add_child(load("res://WinScene.tscn").instance())

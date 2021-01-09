@@ -4,7 +4,8 @@
 [ext_resource path="res://Rageborn/Attacks/BloodCry/BloodCryProjectile.gd" type="Script" id=2]
 
 [sub_resource type="CapsuleShape2D" id=1]
-radius = 3.28813
+radius = 5.17235
+height = 39.0015
 
 [node name="BloodCryProjectile" type="Area2D"]
 collision_layer = 8
@@ -14,12 +15,11 @@ script = ExtResource( 2 )
 [node name="Sprite" type="Sprite" parent="."]
 modulate = Color( 0.858824, 0.505882, 0.129412, 1 )
 position = Vector2( 8, 0 )
-scale = Vector2( 0.1, 0.1 )
+scale = Vector2( 0.2, 0.2 )
 texture = ExtResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2( 16, 0 )
+position = Vector2( 24, 0 )
 rotation = 1.5708
 shape = SubResource( 1 )
 

@@ -61,8 +61,6 @@ func update_ui(part: String):
 	var target_region = player_skin.regions[part][player_skin.current_region[part]]
 	tween.interpolate_property(sprite, "region_rect:position", sprite.region_rect.position, target_region, 0.4, Tween.TRANS_SINE, Tween.EASE_OUT, 0)
 	tween.start()
-	
-	ui_sprites[part].region_rect.position = player_skin.sprites[part].region_rect.position
 
 
 func set_sprite_region(part: String, delta: int):
