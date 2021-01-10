@@ -26,6 +26,7 @@ func _ready():
 	position.y = Main.viewport_size.y / 10
 	hp = MAX_HP
 	Main.add_hp_bar(self)
+	Main.enemies.append(self)
 
 
 func _process(delta: float):
@@ -95,3 +96,7 @@ func add_buff(buff):
 	
 func remove_buff(buff):
 	buffs.erase(buff)
+	
+	
+func _exit_tree():
+	Main.enemies.erase(self)

@@ -28,6 +28,7 @@ var hit_sound_2 := preload("res://Rageborn/Attacks/Scorn/HitSounds/ScornHitSound
 var hit_sound_3 := preload("res://Rageborn/Attacks/Scorn/HitSounds/ScornHitSound3.tscn")
 var hit_sounds := [hit_sound_1, hit_sound_2, hit_sound_3]
 
+
 func init(rageborne):
 	Main.add_child(self)
 	var spawn_position := Vector2()
@@ -35,6 +36,7 @@ func init(rageborne):
 	spawn_position.y = 150 + (Main.viewport_size.y / 2.5) * randf()
 	global_position = spawn_position
 	$Sprite.visible = false
+	Main.enemies.append(self)
 
 
 func init_debug():
@@ -43,6 +45,7 @@ func init_debug():
 	global_position = Main.viewport_size / 2
 	global_position.x += (randf() * 2 - 1) * 200	
 	global_position.y += (randf() * 2 - 1) * 200
+	Main.enemies.append(self)
 
 
 func _ready():
@@ -109,3 +112,7 @@ func add_buff(buff):
 	
 func remove_buff(buff):
 	buffs.erase(buff)
+
+
+func _exit_tree():
+	Main.enemies.erase(self)

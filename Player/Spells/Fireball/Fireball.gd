@@ -3,6 +3,7 @@ extends AbstractSpell
 const SPEED := 800
 
 var direction: Vector2
+var target: Node2D = null
 
 var sound_hit: PackedScene = preload("FireballSoundHit.tscn")
 
@@ -17,8 +18,26 @@ func _process(delta: float):
 	rotate(delta)
 	if current_state != SpellState.CASTED:
 		return
+	update_target()
+	if target != null:
+		var target_direction = (target.global_position - global_position).normalized()
+		direction = lerp(direction, target_direction, delta).normalized()
 	position += direction * delta * SPEED
 	rotate(delta * 10)
+	
+
+func update_target():
+	target = null
+	var min_angle = INF
+	for enemy in Main.enemies:
+		var direction_to_enemy: Vector2 = enemy.global_position - global_position
+		var angle = abs(direction.angle_to(direction_to_enemy))
+		if angle > PI / 2:
+			continue
+		if angle > min_angle:
+			continue
+		min_angle = angle
+		target = enemy
 
 
 func charge_implementation():

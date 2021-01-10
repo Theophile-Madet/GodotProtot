@@ -41,6 +41,7 @@ func init(rageborne):
 	spawn_position *= 70 + 400 * randf()
 	spawn_position = spawn_position.rotated(PI * randf())
 	global_position = rageborne.global_position + spawn_position
+	Main.enemies.append(self)
 	
 
 func init_debug():
@@ -49,6 +50,7 @@ func init_debug():
 	global_position = Main.viewport_size / 2
 	global_position.x += (randf() * 2 - 1) * 200	
 	global_position.y += (randf() * 2 - 1) * 200
+	Main.enemies.append(self)
 	
 	
 func _ready():
@@ -63,7 +65,7 @@ func _ready():
 
 
 func play_summon_sound():
-	Main.play_sound(summon_sound, position, 1)
+	Main.play_sound(summon_sound, position, 0.5)
 	
 
 func spawn():
@@ -147,3 +149,7 @@ func add_buff(buff):
 	
 func remove_buff(buff):
 	buffs.erase(buff)
+
+
+func _exit_tree():
+	Main.enemies.erase(self)

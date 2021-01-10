@@ -4,6 +4,7 @@ const Global = preload("res://GameState.gd")
 
 var viewport_size : Vector2
 var players : Array
+var enemies : Array
 var damage_number_scene := preload("res://DamageNumber.tscn")
 var hp_bar_scene := preload("res://HPBAR/HPBar.tscn")
 var player_scene := preload("Player/Player.tscn")

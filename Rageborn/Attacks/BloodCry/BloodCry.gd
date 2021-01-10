@@ -28,6 +28,7 @@ func init(rageborne):
 	Main.add_child(self)
 	scale = Vector2.ZERO
 	Main.add_hp_bar(self)
+	Main.enemies.append(self)
 
 
 func _ready():
@@ -111,3 +112,7 @@ func hit(damage: float) -> float:
 		
 func add_buff(buff):
 	pass
+
+
+func _exit_tree():
+	Main.enemies.erase(self)
