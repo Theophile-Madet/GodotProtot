@@ -10,15 +10,15 @@ TODO
 -Freeze should prevent shooting
 -Make bloodcry slow and targeted
 -Make heal stronger / different
--Make charging exponential?
 -Make dead damage go to other players (and visualize it) instead of gravehold
 -Make spells visible on all backgrounds (green on heal)
 -Melee attacks on scorns
--Decharge projectiles instead of destroy on hit
 -Make fireball slightly targeted
 -Change Rageborne skin
 
 DONE
+-Make charging exponential?
+-Decharge projectiles instead of destroy on hit
 -Make testing easier (key to spawn enemy...)
 -Added keyboard controls
 -Make hp bar more readable

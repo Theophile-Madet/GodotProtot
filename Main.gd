@@ -22,7 +22,7 @@ func _ready():
 	viewport_size = get_viewport_rect().size
 	game_state = GameState.GameState.CHOOSE_SKIN
 	
-#	add_child(tile_map_scene.instance())
+	add_child(tile_map_scene.instance())
 	gravehold = gravehold_scene.instance()
 	add_child(gravehold)
 	

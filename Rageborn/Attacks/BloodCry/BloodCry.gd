@@ -99,12 +99,14 @@ func get_max_hp():
 	return MAX_HP
 
 
-func hit(damage: float):
+func hit(damage: float) -> float:
 	var hp_before = hp
 	hp -= damage
+	var overkill_damage = -hp
 	Main.show_damage_number(hp - hp_before, global_position)
 	if hp <= 0:
 		queue_free()
+	return overkill_damage
 
 		
 func add_buff(buff):

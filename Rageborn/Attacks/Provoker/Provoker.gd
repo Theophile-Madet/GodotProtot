@@ -59,6 +59,10 @@ func _ready():
 	else:
 		$Particles2D.emitting = true
 		get_tree().create_timer(2.4).connect("timeout", self, "spawn")
+	get_tree().create_timer(0.2 * randf()).connect("timeout", self, "play_summon_sound")
+
+
+func play_summon_sound():
 	Main.play_sound(summon_sound, position, 1)
 	
 

@@ -52,6 +52,10 @@ func _ready():
 	else:
 		$Particles2D.emitting = true
 		get_tree().create_timer(2.4).connect("timeout", self, "spawn")
+	get_tree().create_timer(0.2 * randf()).connect("timeout", self, "play_summon_sound")
+
+
+func play_summon_sound():
 	Main.play_sound(summon_sound, position, 1)
 	
 
@@ -79,6 +83,7 @@ func get_max_hp():
 func hit(damage: float):
 	var hp_before = hp
 	hp -= damage
+	var overkill_damage = -hp
 	Main.show_damage_number(hp - hp_before, global_position)
 	var sounds: Array
 	if hp <= 0:
@@ -88,6 +93,7 @@ func hit(damage: float):
 		sounds = hit_sounds
 	Main.play_sound(sounds[randi() % sounds.size()], position, 0, sound_pitch)
 	hp = clamp(hp, 0, MAX_HP)
+	return overkill_damage
 		
 
 func attack():

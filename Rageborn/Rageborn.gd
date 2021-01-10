@@ -81,10 +81,12 @@ func get_max_hp():
 func hit(damage: float):
 	var hp_before = hp
 	hp -= damage
+	var overkill_damage = -hp
 	Main.show_damage_number(hp - hp_before, global_position)
 	hp = clamp(hp, 0, MAX_HP)
 	if hp <= 0:
 		Main.add_child(load("res://WinScene.tscn").instance())
+	return overkill_damage
 	
 
 func add_buff(buff):
