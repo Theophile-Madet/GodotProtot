@@ -94,6 +94,24 @@ func play_sound_from_file(path: String, position: Vector2, volume_db: float, pit
 
 
 func create_input_map():
+	create_input_action_keyboard("player_1_rune_left", KEY_KP_4)
+	create_input_action_keyboard("player_1_rune_right", KEY_KP_6)
+	create_input_action_keyboard("player_1_rune_top", KEY_KP_8)
+	create_input_action_keyboard("player_1_rune_bottom", KEY_KP_5)
+	create_input_action_keyboard("player_1_start", KEY_ENTER)
+	create_input_action_keyboard("player_1_left", KEY_A)
+	create_input_action_keyboard("player_1_right", KEY_D)
+	create_input_action_keyboard("player_1_up", KEY_W)
+	create_input_action_keyboard("player_1_down", KEY_S)
+	create_input_action_keyboard("player_1_skin_Body_left", KEY_Z)
+	create_input_action_keyboard("player_1_skin_Body_right", KEY_U)
+	create_input_action_keyboard("player_1_skin_Head_left", KEY_H)
+	create_input_action_keyboard("player_1_skin_Head_right", KEY_J)
+	create_input_action_keyboard("player_1_skin_Torso_left", KEY_I)
+	create_input_action_keyboard("player_1_skin_Torso_right", KEY_O)
+	create_input_action_keyboard("player_1_skin_Legs_left", KEY_K)
+	create_input_action_keyboard("player_1_skin_Legs_right", KEY_L)
+	
 	create_input_action_joypad_button("player_%s_rune_left", JOY_XBOX_X)
 	create_input_action_joypad_button("player_%s_rune_right", JOY_XBOX_B)
 	create_input_action_joypad_button("player_%s_rune_top", JOY_XBOX_Y)
@@ -121,7 +139,12 @@ func create_input_map():
 	create_input_action_joypad_button("player_%s_skin_Legs_right", JOY_XBOX_B)
 	
 	
-
+func create_input_action_keyboard(action: String, key: int):
+	create_action_if_necessary(action)
+	var event := InputEventKey.new()
+	event.scancode = key
+	InputMap.action_add_event(action, event)
+	
 func create_input_action_joypad_button(action_base: String, button_index: int):
 	for player_index in range(4):
 		var action := action_base % (player_index + 1)
