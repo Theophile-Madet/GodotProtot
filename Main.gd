@@ -7,10 +7,10 @@ var players : Array
 var damage_number_scene := preload("res://DamageNumber.tscn")
 var hp_bar_scene := preload("res://HPBAR/HPBar.tscn")
 var player_scene := preload("Player/Player.tscn")
-var rageborn_scene = preload("Rageborn/Rageborn.tscn")
-var tile_map_scene = preload("TileMap/TileMap.tscn")
-var gravehold_scene = preload("res://Gravehold/Gravehold.tscn")
-var gravehold
+var rageborn_scene := preload("Rageborn/Rageborn.tscn")
+var tile_map_scene := preload("TileMap/TileMap.tscn")
+var gravehold_scene := preload("res://Gravehold/Gravehold.tscn")
+var gravehold: Gravehold
 var game_state
 var rageborne = null
 
@@ -21,7 +21,6 @@ func _ready():
 	randomize()
 	viewport_size = get_viewport_rect().size
 	game_state = GameState.GameState.CHOOSE_SKIN
-	
 	
 	add_child(tile_map_scene.instance())
 	gravehold = gravehold_scene.instance()

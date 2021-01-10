@@ -78,7 +78,7 @@ func charge(delta: float):
 		
 		
 func cast():
-	player.start_backswing()
+	player.finish_casting()
 	current_state = HealState.CASTED
 	monitoring = true
 	Main.play_sound(sound_cast, position, get_sound_volume())

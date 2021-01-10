@@ -71,7 +71,6 @@ lifetime = 0.5
 one_shot = true
 explosiveness = 0.9
 visibility_rect = Rect2( -150, -150, 300, 300 )
-local_coords = false
 process_material = ExtResource( 5 )
 texture = ExtResource( 3 )
 
@@ -91,7 +90,6 @@ lifetime = 0.5
 one_shot = true
 explosiveness = 0.9
 visibility_rect = Rect2( -150, -150, 300, 300 )
-local_coords = false
 process_material = ExtResource( 8 )
 texture = ExtResource( 6 )
 
@@ -111,7 +109,6 @@ lifetime = 0.5
 one_shot = true
 explosiveness = 0.9
 visibility_rect = Rect2( -150, -150, 300, 300 )
-local_coords = false
 process_material = ExtResource( 11 )
 texture = ExtResource( 12 )
 
@@ -131,7 +128,6 @@ lifetime = 0.5
 one_shot = true
 explosiveness = 0.9
 visibility_rect = Rect2( -150, -150, 300, 300 )
-local_coords = false
 process_material = ExtResource( 14 )
 texture = ExtResource( 15 )
 

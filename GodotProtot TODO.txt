@@ -3,7 +3,6 @@ TODO
 -Start menu / Better level start menus
 -Particles on spell hit
 -Effect on player hit
--Make testing easier (key to spawn enemy...)
 -Add blood on hit
 -Notify death
 -Boss melee attack to prevent camping in front of it
@@ -20,6 +19,7 @@ TODO
 -Change Rageborne skin
 
 DONE
+-Make testing easier (key to spawn enemy...)
 -Added keyboard controls
 -Make hp bar more readable
 -Damage feedback numbers

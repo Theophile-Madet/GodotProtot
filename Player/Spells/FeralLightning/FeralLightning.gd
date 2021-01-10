@@ -57,7 +57,7 @@ func charge(delta: float):
 	
 func cast():
 	$SoundCharge.stop()
-	player.start_backswing()
+	player.finish_casting()
 	current_state = FeralLightningState.CASTED
 	monitoring = true
 	var charge_ratio := current_charge / MAX_CHARGE

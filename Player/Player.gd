@@ -2,13 +2,12 @@ extends Node2D
 
 class_name Player
 
-
-const SPEED: float = 400.0
+const SPEED := 400.0
 var sprite_size : Vector2
 
 const SIZE := 48
-const MAX_HP = 20
-var hp: float = MAX_HP
+const MAX_HP := 20.0
+var hp := MAX_HP
 var current_look_direction: Vector2 = Vector2.UP
 var current_move_direction: Vector2
 var current_spell: Node2D
@@ -16,9 +15,9 @@ var current_charge_particle: Node2D
 var current_cast_particle: Node2D
 var player_index: int
 var skin
+var precharge := 0.0
 
 
-const BACKSWING_DURATION = 0.01
 const fireball_scene : PackedScene = preload("Spells/Fireball/Fireball.tscn")
 const feral_lightning_scene : PackedScene = preload("Spells/FeralLightning/FeralLightning.tscn")
 const heal_scene : PackedScene = preload("Spells/Heal/Heal.tscn")
@@ -58,6 +57,9 @@ func _ready():
 func _process(delta: float):
 	if Main.game_state == GameState.GameState.CHOOSE_SKIN:
 		return
+	
+	if current_state != PlayerState.CASTING:
+		precharge = precharge + delta
 		
 	update_look_direction()
 	if current_state == PlayerState.MOVING:
@@ -100,7 +102,7 @@ func do_spells(delta: float):
 		if Input.is_action_just_released(current_spell.input_action):
 			current_spell.cast()
 		else:
-			current_spell.charge(delta)
+			current_spell.charge(delta, false)
 			current_charge_particle.rotation = current_look_direction.angle()
 			current_cast_particle.rotation = current_look_direction.angle()
 	elif current_state == PlayerState.MOVING:
@@ -116,12 +118,12 @@ func do_spells(delta: float):
 	
 func start_fireball():
 	current_state = PlayerState.CASTING
-	var fireball = fireball_scene.instance()
-	current_spell = fireball
-	fireball.init(self)
 	current_charge_particle = $ParticlesRuneRedCharge
 	current_cast_particle = $ParticlesRuneRedCast
 	current_charge_particle.emitting = true
+	var fireball = fireball_scene.instance()
+	current_spell = fireball
+	fireball.init(self)
 	
 	
 func start_heal():
@@ -154,18 +156,13 @@ func start_frost_nova():
 	current_charge_particle.emitting = true
 	
 	
-func start_backswing():
+func finish_casting():
 	current_charge_particle.emitting = false
 	current_cast_particle.amount = max(1, 20 * (current_spell.current_charge / current_spell.MAX_CHARGE))
 	current_cast_particle.emitting = true
 	current_spell = null
-	current_state = PlayerState.BACKSWING
-	get_tree().create_timer(BACKSWING_DURATION).connect("timeout", self, "end_backswing")
-	
-
-func end_backswing():
-	if current_state == PlayerState.BACKSWING:
-		current_state = PlayerState.MOVING
+	current_state = PlayerState.MOVING
+	precharge = 0
 	
 	
 func hit(damage: float):
