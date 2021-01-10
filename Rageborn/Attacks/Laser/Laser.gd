@@ -1,19 +1,24 @@
 extends Area2D
 
-var rageborne : Node2D
-var main
+class_name Laser 
+
 var touched : Array
 
+
 func init(rageborne : Node2D):
-	rageborne = rageborne
-	main = rageborne.main
 	rageborne.add_child(self)
-	
+
+
+func init_debug():
+	global_position = Main.viewport_size / 2
+	Main.add_child(self)
+		
 	
 func _ready():
 	connect("body_entered", self, "on_player_touched")
-	var players = main.players
+	var players = Main.players
 	var target : Node2D = players[randi() % players.size()]
+	var angle = (target.global_position - global_position).angle() - PI / 2
 	rotation = (target.global_position - global_position).angle() - PI / 2
 	touched = []
 	
@@ -23,7 +28,7 @@ func _ready():
 	tween.start()
 	
 	tween = Tween.new()
-	var viewport_size = max(main.viewport_size.x, main.viewport_size.y)
+	var viewport_size = max(Main.viewport_size.x, Main.viewport_size.y)
 	var target_scale =  viewport_size / $Sprite.get_rect().size.y 
 	tween.interpolate_property(self, "scale:y", 0, target_scale, 0.2, Tween.TRANS_SINE, Tween.EASE_IN)
 	add_child(tween)

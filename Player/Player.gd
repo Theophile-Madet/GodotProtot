@@ -5,7 +5,6 @@ class_name Player
 
 const SPEED: float = 400.0
 var sprite_size : Vector2
-onready var main = get_node("/root/Main")
 
 const SIZE := 48
 const MAX_HP = 20
@@ -43,21 +42,21 @@ func init(_player_index: int):
 	
 func _ready():
 	sprite_size = $PlayerSkin/Body.region_rect.size
-	position.x = main.viewport_size.x / 2
-	position.y = main.viewport_size.y * 3 / 4
-	main.players.append(self)
-	main.add_hp_bar(self)
+	position.x = Main.viewport_size.x / 2
+	position.y = Main.viewport_size.y * 3 / 4
+	Main.players.append(self)
+	Main.add_hp_bar(self)
 	current_state = PlayerState.MOVING
 	skin = $PlayerSkin
 	skin.init(self)
-	main.connect("game_state_changed", self, "on_game_state_changed")
+	Main.connect("game_state_changed", self, "on_game_state_changed")
 	skin_choice_ui = skin_choice_scene.instance()
 	skin_choice_ui.init(self)
-	on_game_state_changed(main.game_state)
+	on_game_state_changed(Main.game_state)
 	
 	
 func _process(delta: float):
-	if main.game_state == GameState.GameState.CHOOSE_SKIN:
+	if Main.game_state == GameState.GameState.CHOOSE_SKIN:
 		return
 		
 	update_look_direction()
@@ -92,8 +91,8 @@ func do_movement(delta: float):
 	
 	var velocity := current_move_direction.normalized() * SPEED
 	position += velocity * delta
-	position.x = clamp(position.x, sprite_size.x / 2, main.viewport_size.x - sprite_size.x / 2)
-	position.y = clamp(position.y, sprite_size.y / 2, main.viewport_size.y - sprite_size.y / 2)
+	position.x = clamp(position.x, sprite_size.x / 2, Main.viewport_size.x - sprite_size.x / 2)
+	position.y = clamp(position.y, sprite_size.y / 2, Main.viewport_size.y - sprite_size.y / 2)
 
 		
 func do_spells(delta: float):
@@ -172,9 +171,9 @@ func end_backswing():
 func hit(damage: float):
 	var hp_before = hp
 	hp -= damage
-	main.show_damage_number(hp - hp_before, global_position)
+	Main.show_damage_number(hp - hp_before, global_position)
 	if hp < 0 :
-		main.gravehold.hit(-hp * 2)
+		Main.gravehold.hit(-hp * 2)
 	hp = clamp(hp, 0, MAX_HP)
 	if damage > 0:
 		skin.play_hit_sound()
@@ -203,10 +202,10 @@ func on_game_state_changed(new_state):
 
 
 func set_ui_position():
-	var x_pos = main.viewport_size.x / 4
+	var x_pos = Main.viewport_size.x / 4
 	if player_index == 2 or player_index == 4:
 		x_pos *= 3
-	var y_pos = main.viewport_size.y / 4
+	var y_pos = Main.viewport_size.y / 4
 	if player_index == 3 or player_index == 4:
 		y_pos *= 3
 	global_position = Vector2(x_pos, y_pos)

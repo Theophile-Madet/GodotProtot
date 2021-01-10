@@ -8,12 +8,12 @@ var direction: Vector2
 
 func init(bloodcry: Node2D):
 	global_position = bloodcry.global_position
-	var targets = bloodcry.main.players.duplicate()
-	targets.append(bloodcry.main.gravehold)
+	var targets = Main.players.duplicate()
+	targets.append(Main.gravehold)
 	target = targets[randi() % targets.size()]
 	look_at(target.global_position)
 	direction = (target.global_position - global_position).normalized()
-	bloodcry.main.add_child(self)
+	Main.add_child(self)
 	connect("body_entered", self, "on_body_touched")
 	$VisibilityNotifier2D.connect("screen_exited", self, "queue_free")
 

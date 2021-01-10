@@ -1,17 +1,19 @@
 extends RigidBody2D
 
+class_name Scorn
+
 const SPEED = 0
 const SIZE = 48
 
 
 const MAX_HP:= 3
 var hp: float = MAX_HP
-var main
 var boulder_scene: PackedScene = preload("res://Rageborn/Attacks/Scorn/Boulder/ScornBoulder.tscn")
 const ATTACK_COOLDOWN := 5
 var time_since_last_attack: float = 0
 var sound_pitch = 0.5 + randf()
 var buffs := []
+var debug := false
 
 var summon_sound := preload("res://Rageborn/Attacks/SummonSound/SummonSound.tscn")
 var throw_sound := preload("res://Rageborn/Attacks/Scorn/ScornThrowSound.tscn")
@@ -27,30 +29,35 @@ var hit_sound_3 := preload("res://Rageborn/Attacks/Scorn/HitSounds/ScornHitSound
 var hit_sounds := [hit_sound_1, hit_sound_2, hit_sound_3]
 
 func init(rageborne):
-	main = rageborne.main
-	main.add_child(self)
+	Main.add_child(self)
 	var spawn_position := Vector2()
-	spawn_position.x = 400 + (main.viewport_size.x - 800) * randf()
-	spawn_position.y = 150 + (main.viewport_size.y / 2.5) * randf()
+	spawn_position.x = 400 + (Main.viewport_size.x - 800) * randf()
+	spawn_position.y = 150 + (Main.viewport_size.y / 2.5) * randf()
 	global_position = spawn_position
 	$Sprite.visible = false
-	
-	
+
+
+func init_debug():
+	debug = true
+	Main.add_child(self)
+	global_position = Main.viewport_size / 2
+	global_position.x += (randf() * 2 - 1) * 200	
+	global_position.y += (randf() * 2 - 1) * 200
+
+
 func _ready():
-	$Particles2D.emitting = true
-	var timer := Timer.new()
-	timer.wait_time = 2.4
-	timer.connect("timeout", self, "spawn")
-	timer.one_shot = true
-	add_child(timer)
-	timer.start()
 	layers = 0b0
-	main.play_sound(summon_sound, position, 1)
+	if debug:
+		spawn()
+	else:
+		$Particles2D.emitting = true
+		get_tree().create_timer(2.4).connect("timeout", self, "spawn")
+	Main.play_sound(summon_sound, position, 1)
 	
 
 func spawn():
 	$Sprite.visible = true
-	main.add_hp_bar(self)
+	Main.add_hp_bar(self)
 	layers = 0b10
 	$SpawnSound.play()
 	
@@ -72,14 +79,14 @@ func get_max_hp():
 func hit(damage: float):
 	var hp_before = hp
 	hp -= damage
-	main.show_damage_number(hp - hp_before, global_position)
+	Main.show_damage_number(hp - hp_before, global_position)
 	var sounds: Array
 	if hp <= 0:
 		sounds = death_sounds
 		queue_free()
 	else :
 		sounds = hit_sounds
-	main.play_sound(sounds[randi() % sounds.size()], position, 0, sound_pitch)
+	Main.play_sound(sounds[randi() % sounds.size()], position, 0, sound_pitch)
 	hp = clamp(hp, 0, MAX_HP)
 		
 
@@ -87,7 +94,7 @@ func attack():
 	time_since_last_attack -= ATTACK_COOLDOWN
 	var boulder = boulder_scene.instance()
 	boulder.init(self)
-	main.play_sound(throw_sound, position, 0, 0.75 + randf() * 0.5)
+	Main.play_sound(throw_sound, position, 0, 0.75 + randf() * 0.5)
 	
 
 func add_buff(buff):

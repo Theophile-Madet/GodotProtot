@@ -6,7 +6,6 @@ var current_charge : float
 
 var input_action: String
 var player: Node2D
-var main
 var circle_base_scale: float
 
 var sound_cast: PackedScene = preload("FeralLightningSoundCast.tscn")
@@ -21,12 +20,11 @@ var enemies_in_range: Array = []
 
 func init(_player: Node2D):
 	player = _player
-	main = player.main
 	global_position = player.global_position
 	input_action = "player_%s_rune_top" % player.player_index
 	circle_base_scale = $Circle.scale.x
 	$Circle.scale = Vector2.ZERO
-	main.add_child(self)
+	Main.add_child(self)
 	
 
 func _ready():
@@ -63,7 +61,7 @@ func cast():
 	current_state = FeralLightningState.CASTED
 	monitoring = true
 	var charge_ratio := current_charge / MAX_CHARGE
-	main.play_sound(sound_cast, position, get_sound_volume())
+	Main.play_sound(sound_cast, position, get_sound_volume())
 	var material: ParticlesMaterial = $ParticlesSparks.process_material
 	material.emission_sphere_radius = 150 * charge_ratio
 	material.scale = 0.2 * charge_ratio

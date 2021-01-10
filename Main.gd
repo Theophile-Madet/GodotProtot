@@ -16,6 +16,7 @@ var rageborne = null
 
 signal game_state_changed(new_state)
 
+	
 func _ready():
 	randomize()
 	viewport_size = get_viewport_rect().size
@@ -27,7 +28,6 @@ func _ready():
 	add_child(gravehold)
 	
 	create_input_map()
-	
 	create_player(1)
 
 	
@@ -139,13 +139,14 @@ func create_input_map():
 	create_input_action_joypad_button("player_%s_skin_Legs_right", JOY_XBOX_B)
 	
 	
-func create_input_action_keyboard(action: String, key: int):
+static func create_input_action_keyboard(action: String, key: int):
 	create_action_if_necessary(action)
 	var event := InputEventKey.new()
 	event.scancode = key
 	InputMap.action_add_event(action, event)
 	
-func create_input_action_joypad_button(action_base: String, button_index: int):
+	
+static func create_input_action_joypad_button(action_base: String, button_index: int):
 	for player_index in range(4):
 		var action := action_base % (player_index + 1)
 		create_action_if_necessary(action)
@@ -155,7 +156,7 @@ func create_input_action_joypad_button(action_base: String, button_index: int):
 		InputMap.action_add_event(action, event)
 		
 
-func create_input_action_joypad_axis(action_base: String, axis: int, axis_value: float):
+static func create_input_action_joypad_axis(action_base: String, axis: int, axis_value: float):
 	for player_index in range(4):
 		var action := action_base % (player_index + 1)
 		create_action_if_necessary(action)
@@ -166,7 +167,7 @@ func create_input_action_joypad_axis(action_base: String, axis: int, axis_value:
 		InputMap.action_add_event(action, event)
 		
 
-func create_action_if_necessary(action: String):
+static func create_action_if_necessary(action: String):
 	if InputMap.has_action(action):
 		return
 	InputMap.add_action(action)

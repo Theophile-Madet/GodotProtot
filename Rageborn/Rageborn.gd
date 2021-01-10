@@ -7,7 +7,6 @@ var time_since_last_minion_attack: float = MINION_ATTACK_COOLDOWN - 5
 const SPELL_ATTACK_COOLDOWN := 7
 var time_since_last_spell_attack: float = MINION_ATTACK_COOLDOWN - 2
 
-onready var main = get_node("/root/Main")
 
 var buffs := []
 
@@ -23,10 +22,10 @@ var hp
 
 	
 func _ready():
-	position.x = main.viewport_size.x / 2
-	position.y = main.viewport_size.y / 10
+	position.x = Main.viewport_size.x / 2
+	position.y = Main.viewport_size.y / 10
 	hp = MAX_HP
-	main.add_hp_bar(self)
+	Main.add_hp_bar(self)
 
 
 func _process(delta: float):
@@ -63,7 +62,7 @@ func spell_attack():
 	var nb_attacks := 0
 	match attack_scene:
 		laser_scene:
-			nb_attacks = randi() % main.players.size()
+			nb_attacks = randi() % Main.players.size()
 		bloodcry_scene:
 			nb_attacks = 1
 			
@@ -82,10 +81,10 @@ func get_max_hp():
 func hit(damage: float):
 	var hp_before = hp
 	hp -= damage
-	main.show_damage_number(hp - hp_before, global_position)
+	Main.show_damage_number(hp - hp_before, global_position)
 	hp = clamp(hp, 0, MAX_HP)
 	if hp <= 0:
-		main.add_child(load("res://WinScene.tscn").instance())
+		Main.add_child(load("res://WinScene.tscn").instance())
 	
 
 func add_buff(buff):

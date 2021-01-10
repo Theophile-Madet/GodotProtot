@@ -8,7 +8,6 @@ var current_charge : float
 var player : Node2D
 var current_direction: Vector2
 var has_hit_player: bool
-var main
 var target: Node2D = null
 
 var sound_cast: PackedScene = preload("HealSoundCast.tscn")
@@ -23,8 +22,7 @@ var current_state
 
 func init(_player):
 	player = _player
-	main = player.main
-	main.add_child(self)
+	Main.add_child(self)
 
 
 func _ready():
@@ -53,7 +51,7 @@ func _process(delta: float):
 func update_target():
 	target = null
 	var min_distance = INF
-	for player in main.players:
+	for player in Main.players:
 		if player == self.player:
 			continue
 		var direction_to_player: Vector2 = player.global_position - global_position
@@ -83,7 +81,7 @@ func cast():
 	player.start_backswing()
 	current_state = HealState.CASTED
 	monitoring = true
-	main.play_sound(sound_cast, position, get_sound_volume())
+	Main.play_sound(sound_cast, position, get_sound_volume())
 	$SoundCharge.stop()
 	
 	
@@ -93,7 +91,7 @@ func player_hit(player: RigidBody2D):
 	player.hit(-current_charge * 2)
 	queue_free()
 	has_hit_player = true
-	main.play_sound(sound_hit, position, get_sound_volume())
+	Main.play_sound(sound_hit, position, get_sound_volume())
 
 
 func get_sound_volume() -> float:

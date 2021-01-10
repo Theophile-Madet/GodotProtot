@@ -13,19 +13,18 @@ const parts = ["Body", "Head", "Torso", "Legs"]
 
 func init(_player):
 	player = _player
-	player.main.add_child(self)
+	Main.add_child(self)
 	
 
 func _ready():
 	var player_index = player.player_index
-	print(player_index)
 	$PlayerNumber.text = "Player %s" % player_index
 	
 	if player_index == 2 or player_index == 4:
-		rect_position.x = player.main.viewport_size.x / 2
+		rect_position.x = Main.viewport_size.x / 2
 		
 	if player_index == 3 or player_index == 4:
-		rect_position.y = player.main.viewport_size.y / 2
+		rect_position.y = Main.viewport_size.y / 2
 		
 	for part in parts:
 		player_sprites[part] =  player_skin.get_node(part)
@@ -35,7 +34,7 @@ func _ready():
 	
 	
 func _process(_delta):
-	if player.main.game_state != GameState.GameState.CHOOSE_SKIN:
+	if Main.game_state != GameState.GameState.CHOOSE_SKIN:
 		return
 		
 	for part in parts:

@@ -1,5 +1,6 @@
 extends RigidBody2D
 
+class_name BloodCry
 
 const SIZE := 64
 const CHARGE_TIME := 20
@@ -15,20 +16,18 @@ var current_state = BloodCryState.CHARGING
 
 const MAX_HP:= 4
 var hp: float = MAX_HP
-var main
 
 
 var projectile_scene: PackedScene = preload("res://Rageborn/Attacks/BloodCry/BloodCryProjectile.tscn")
 
 func init(rageborne):
-	main = rageborne.main
 	var spawn_position := Vector2()
-	spawn_position.x = 75 + (main.viewport_size.x - 150) * randf()
-	spawn_position.y = 175 + (main.viewport_size.y / 2.2) * randf()
+	spawn_position.x = 75 + (Main.viewport_size.x - 150) * randf()
+	spawn_position.y = 175 + (Main.viewport_size.y / 2.2) * randf()
 	position = spawn_position
-	main.add_child(self)
+	Main.add_child(self)
 	scale = Vector2.ZERO
-	main.add_hp_bar(self)
+	Main.add_hp_bar(self)
 
 
 func _ready():
@@ -103,7 +102,7 @@ func get_max_hp():
 func hit(damage: float):
 	var hp_before = hp
 	hp -= damage
-	main.show_damage_number(hp - hp_before, global_position)
+	Main.show_damage_number(hp - hp_before, global_position)
 	if hp <= 0:
 		queue_free()
 

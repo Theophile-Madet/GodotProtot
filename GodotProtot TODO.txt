@@ -17,8 +17,10 @@ TODO
 -Melee attacks on scorns
 -Decharge projectiles instead of destroy on hit
 -Make fireball slightly targeted
+-Change Rageborne skin
 
 DONE
+-Added keyboard controls
 -Make hp bar more readable
 -Damage feedback numbers
 -Player skin choose menu

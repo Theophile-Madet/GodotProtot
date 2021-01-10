@@ -9,7 +9,7 @@ func init(main, _damage: float, _global_position: Vector2):
 	if damage == 0:
 		queue_free()
 	global_position = _global_position
-	main.add_child(self)
+	Main.add_child(self)
 	color = Color(0.8, 0, 0)
 	if damage > 0:
 		color = Color(0, 0.8, 0)

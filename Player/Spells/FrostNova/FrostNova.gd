@@ -6,7 +6,6 @@ var input_action: String
 var current_charge : float
 var player : Node2D
 var direction: Vector2
-var main
 var enemies_in_range: Array
 
 var sound_cast: PackedScene = preload("FrostNovaSoundCast.tscn")
@@ -21,8 +20,7 @@ var current_state
 
 func init(_player):
 	player = _player
-	main = player.main
-	main.add_child(self)
+	Main.add_child(self)
 
 
 func _ready():
@@ -51,7 +49,7 @@ func cast():
 	player.start_backswing()
 	current_state = FrostNovaState.CASTED
 	monitoring = true
-	main.play_sound(sound_cast, position, get_sound_volume())
+	Main.play_sound(sound_cast, position, get_sound_volume())
 	$SoundCharge.stop()
 	for enemy in enemies_in_range:
 		var direction_to_enemy = enemy.global_position - global_position

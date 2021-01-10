@@ -7,7 +7,6 @@ var current_region := {}
 
 var voice: String
 var voice_max_index: int
-var main
 var player
 
 const parts = ["Body", "Head", "Torso", "Legs"]
@@ -16,7 +15,6 @@ var sprites = {}
 
 func init(_player):
 	player = _player
-	main = player.main
 	
 	
 func _ready():
@@ -77,4 +75,4 @@ func build_sprite_regions():
 func play_hit_sound():
 	var index = (randi() % voice_max_index) + 1
 	var path := "res://Player/Sounds/%sHurt/S-%s.wav" % [voice, index]	
-	main.play_sound_from_file(path, position, 0)
+	Main.play_sound_from_file(path, position, 0)
