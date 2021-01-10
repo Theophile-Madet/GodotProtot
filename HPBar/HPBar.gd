@@ -14,6 +14,6 @@ func _ready():
 	
 func _process(_delta):
 	$HP.max_value = target.get_max_hp()
-	rect_size.x = $HP.max_value * 4
+	rect_size.x = max($HP.max_value * 4, 10)
 	rect_position.x = - rect_size.x / 2
 	$HP.value = target.get_current_hp()
