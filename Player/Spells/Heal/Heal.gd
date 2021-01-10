@@ -1,44 +1,21 @@
-extends Area2D
+extends AbstractSpell
 
-const MAX_CHARGE := 2
 const SPEED := 800
-var input_action: String
 
-var current_charge : float
-var player : Node2D
 var current_direction: Vector2
-var has_hit_player: bool
 var target: Node2D = null
 
-var sound_cast: PackedScene = preload("HealSoundCast.tscn")
 var sound_hit: PackedScene = preload("HealSoundHit.tscn")
-
-enum HealState {
-	CHARGING,
-	CASTED,
-}
-var current_state
-
-
-func init(_player):
-	player = _player
-	Main.add_child(self)
 
 
 func _ready():
-	current_charge = player.BACKSWING_DURATION
-	current_state = HealState.CHARGING
 	$VisibilityNotifier2D.connect("screen_exited", self, "queue_free")
 	connect("body_entered", self, "player_hit")
-	scale = Vector2(0 , 0)
-	has_hit_player = false
-	input_action = "player_%s_rune_bottom" % player.player_index
-	$SoundCharge.play()
 
 
 func _process(delta: float):
 	rotate(delta)
-	if current_state != HealState.CASTED:
+	if current_state != SpellState.CASTED:
 		return
 	update_target()
 	if target != null:
@@ -65,34 +42,29 @@ func update_target():
 		target = player
 		
 	
-func charge(delta: float):
+func charge_implementation():
 	current_direction = player.current_look_direction
 	global_position = player.global_position + current_direction.normalized() * player.SIZE
-	current_charge += delta
-	var charge_ratio := current_charge / MAX_CHARGE
-	scale = Vector2.ONE * charge_ratio * 0.5
-	$Particles2D.emitting = charge_ratio > 0.5
-	$Particles2D.process_material.scale = charge_ratio * 0.1
-	if current_charge >= MAX_CHARGE:
-		cast()
+	scale = Vector2.ONE * charge_ratio() * 0.5
+	$Particles2D.emitting = charge_ratio() > 0.5
+	$Particles2D.process_material.scale = charge_ratio() * 0.1
 		
 		
-func cast():
-	player.finish_casting()
-	current_state = HealState.CASTED
+func cast_implementation():
 	monitoring = true
-	Main.play_sound(sound_cast, position, get_sound_volume())
-	$SoundCharge.stop()
 	
 	
 func player_hit(player: RigidBody2D):
-	if has_hit_player:
+	if is_queued_for_deletion():
 		return
 	player.hit(-current_charge * 2)
 	queue_free()
-	has_hit_player = true
 	Main.play_sound(sound_hit, position, get_sound_volume())
+	
 
-
-func get_sound_volume() -> float:
-	return -12 * (1 - (current_charge / MAX_CHARGE))
+func sound_cast() -> PackedScene:
+	return preload("HealSoundCast.tscn")
+func max_charge() -> float:
+	return 2.0
+func rune() -> String:
+	return "bottom"

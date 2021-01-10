@@ -10,7 +10,7 @@ const MAX_HP := 20.0
 var hp := MAX_HP
 var current_look_direction: Vector2 = Vector2.UP
 var current_move_direction: Vector2
-var current_spell: Node2D
+var current_spell: AbstractSpell
 var current_charge_particle: Node2D
 var current_cast_particle: Node2D
 var player_index: int
@@ -60,6 +60,9 @@ func _process(delta: float):
 	
 	if current_state != PlayerState.CASTING:
 		precharge = precharge + delta
+	var precharge_ratio = clamp(precharge / 3, 0, 1)
+	
+	$PlayerSkin/Staff/Particles2D.scale = Vector2.ONE * precharge_ratio
 		
 	update_look_direction()
 	if current_state == PlayerState.MOVING:
@@ -158,7 +161,7 @@ func start_frost_nova():
 	
 func finish_casting():
 	current_charge_particle.emitting = false
-	current_cast_particle.amount = max(1, 20 * (current_spell.current_charge / current_spell.MAX_CHARGE))
+	current_cast_particle.amount = max(1, 20 * (current_spell.current_charge / current_spell.max_charge()))
 	current_cast_particle.emitting = true
 	current_spell = null
 	current_state = PlayerState.MOVING

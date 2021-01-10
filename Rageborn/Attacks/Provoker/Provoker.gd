@@ -105,9 +105,12 @@ func get_max_hp():
 	return MAX_HP
 	
 	
-func hit(damage: float):
-	var hp_before = hp
+func hit(damage: float) -> float:
+	var hp_before := hp
 	hp -= damage
+	var overkill_damage := -hp
+	hp = clamp(hp, 0, MAX_HP)
+	
 	Main.show_damage_number(hp - hp_before, global_position)
 	var sounds: Array
 	if hp <= 0:
@@ -116,7 +119,8 @@ func hit(damage: float):
 	else :
 		sounds = hit_sounds
 	Main.play_sound(sounds[randi() % sounds.size()], position, 0, sound_pitch)
-	hp = clamp(hp, 0, MAX_HP)
+	
+	return overkill_damage
 
 
 func do_attack(delta: float):

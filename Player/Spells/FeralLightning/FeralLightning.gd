@@ -1,44 +1,18 @@
-extends Area2D
-
-
-const MAX_CHARGE := 2
-var current_charge : float
-
-var input_action: String
-var player: Node2D
-var circle_base_scale: float
-
-var sound_cast: PackedScene = preload("FeralLightningSoundCast.tscn")
-
-enum FeralLightningState {
-	CHARGING,
-	CASTED,
-}
-var current_state
+extends AbstractSpell
 
 var enemies_in_range: Array = []
-
-func init(_player: Node2D):
-	player = _player
-	global_position = player.global_position
-	input_action = "player_%s_rune_top" % player.player_index
-	circle_base_scale = $Circle.scale.x
-	$Circle.scale = Vector2.ZERO
-	Main.add_child(self)
 	
 
 func _ready():
+	global_position = player.global_position
 	$ParticlesCircle.emitting = true
-	current_charge = player.BACKSWING_DURATION
-	current_state = FeralLightningState.CHARGING
 	connect("body_entered", self, "on_body_entered")
 	connect("body_exited", self, "on_body_exited")
 	var endColor = $Circle.modulate
 	var startColor = endColor
 	startColor.a = 0
 	$Circle.modulate = startColor
-	$SoundCharge.play()
-	
+
 	var tween := Tween.new()
 	tween.interpolate_property($Circle, "modulate", startColor, endColor, 0.5, Tween.TRANS_SINE, Tween.EASE_OUT, 0)
 	add_child(tween)
@@ -46,26 +20,18 @@ func _ready():
 	
 
 
-func charge(delta: float):
-	current_charge += delta
-	var charge_ratio := current_charge / MAX_CHARGE
-	$Circle.scale = Vector2.ONE * charge_ratio * circle_base_scale
-	($CollisionShape2D.shape as CircleShape2D).radius = 184 * charge_ratio
-	if current_charge >= MAX_CHARGE:
-		cast()
+func charge_implementation():
+	scale = Vector2.ONE * charge_ratio()
+	($CollisionShape2D.shape as CircleShape2D).radius = 184 * charge_ratio()
 	
 	
-func cast():
-	$SoundCharge.stop()
-	player.finish_casting()
-	current_state = FeralLightningState.CASTED
+func cast_implementation():
 	monitoring = true
-	var charge_ratio := current_charge / MAX_CHARGE
-	Main.play_sound(sound_cast, position, get_sound_volume())
+	
 	var material: ParticlesMaterial = $ParticlesSparks.process_material
-	material.emission_sphere_radius = 150 * charge_ratio
-	material.scale = 0.2 * charge_ratio
-	$ParticlesSparks.amount = 5 * charge_ratio
+	material.emission_sphere_radius = 150 * charge_ratio()
+	material.scale = 0.2 * charge_ratio()
+	$ParticlesSparks.amount = 5 * charge_ratio()
 	$ParticlesSparks.emitting = true
 	get_tree().create_timer(1).connect("timeout", self, "queue_free")
 	for enemy in enemies_in_range:
@@ -80,5 +46,9 @@ func on_body_exited(body: RigidBody2D):
 	enemies_in_range.erase(body)
 
 
-func get_sound_volume() -> float:
-	return -12 * (1 - (current_charge / MAX_CHARGE))
+func sound_cast() -> PackedScene:
+	return preload("FeralLightningSoundCast.tscn")
+func max_charge() -> float:
+	return 2.0
+func rune() -> String:
+	return "top"

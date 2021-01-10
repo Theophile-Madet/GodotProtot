@@ -28,7 +28,7 @@ colors = PoolColorArray( 0.6, 0.870588, 0.890196, 0, 0.6, 0.870588, 0.890196, 1,
 gradient = SubResource( 2 )
 
 [sub_resource type="Curve" id=4]
-_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+_data = [ Vector2( 0.51004, 1 ), 0.0, 0.0707384, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="CurveTexture" id=5]
 curve = SubResource( 4 )
@@ -38,13 +38,12 @@ flag_disable_z = true
 direction = Vector3( 10, 0, 0 )
 spread = 180.0
 gravity = Vector3( 0, 0, 0 )
-initial_velocity = 5.0
+initial_velocity = 15.0
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 angle = 360.0
 angle_random = 1.0
-scale = 0.02
-scale_random = 0.03
+scale = 0.01
 scale_curve = SubResource( 5 )
 color_ramp = SubResource( 3 )
 
@@ -167,8 +166,6 @@ region_rect = Rect2( 800, 137, 16, 16 )
 
 [node name="Particles2D" type="Particles2D" parent="PlayerSkin/Staff"]
 position = Vector2( -5.31438, -2.59659 )
-amount = 4
-lifetime = 0.5
-local_coords = false
+lifetime = 0.3
 process_material = SubResource( 6 )
 texture = ExtResource( 9 )
