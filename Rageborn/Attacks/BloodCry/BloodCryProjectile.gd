@@ -1,7 +1,8 @@
 extends Area2D
 
 
-const SPEED := 300
+const SPEED := 150
+const STEERING := 2
 var target: Node2D
 var direction: Vector2
 
@@ -19,7 +20,7 @@ func init(bloodcry: Node2D):
 
 
 func _process(delta: float):
-	direction = lerp(direction, (target.global_position - global_position).normalized(), delta * 1)
+	direction = lerp(direction, (target.global_position - global_position).normalized(), delta * STEERING)
 	direction = direction.normalized()
 	rotation = direction.angle()
 	position += direction * delta * SPEED
