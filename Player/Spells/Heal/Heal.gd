@@ -57,7 +57,7 @@ func cast_implementation():
 func player_hit(player: RigidBody2D):
 	if is_queued_for_deletion():
 		return
-	player.hit(-current_charge * 2)
+	player.hit(-current_charge * 4)
 	queue_free()
 	Main.play_sound(sound_hit, position, get_sound_volume())
 	
